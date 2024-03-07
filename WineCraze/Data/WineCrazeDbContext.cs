@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WineCraze.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class WineCrazeDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public WineCrazeDbContext(DbContextOptions<WineCrazeDbContext> options)
             : base(options)
         {
         }

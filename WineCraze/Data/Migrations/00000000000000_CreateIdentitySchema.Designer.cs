@@ -9,7 +9,7 @@ using WineCraze.Data;
 
 namespace WineCraze.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(WineCrazeDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
