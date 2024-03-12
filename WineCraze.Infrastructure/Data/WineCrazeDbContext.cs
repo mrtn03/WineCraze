@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.Arm;
 using WineCraze.Infrastructure.Data.Models;
 
 namespace WineCraze.Data
@@ -17,8 +19,8 @@ namespace WineCraze.Data
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Report> Reports { get; set; }
 
-        //protected override void OnModelCreating( modelBuilder)
-        //{
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
     }
 }
