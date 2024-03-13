@@ -17,8 +17,9 @@ namespace WineCraze.Data
         public DbSet<Supplier> Suppliers { get; set; } = null!;
         public DbSet<Report> Reports { get; set; } = null!;
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
         }
     }
 }
