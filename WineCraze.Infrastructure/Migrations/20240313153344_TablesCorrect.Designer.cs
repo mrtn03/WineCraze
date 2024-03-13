@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WineCraze.Data;
 
@@ -11,9 +12,10 @@ using WineCraze.Data;
 namespace WineCraze.Infrastructure.Migrations
 {
     [DbContext(typeof(WineCrazeDbContext))]
-    partial class WineCrazeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240313153344_TablesCorrect")]
+    partial class TablesCorrect
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

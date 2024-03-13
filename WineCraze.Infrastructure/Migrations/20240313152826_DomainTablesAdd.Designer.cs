@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WineCraze.Data;
 
@@ -11,9 +12,10 @@ using WineCraze.Data;
 namespace WineCraze.Infrastructure.Migrations
 {
     [DbContext(typeof(WineCrazeDbContext))]
-    partial class WineCrazeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240313152826_DomainTablesAdd")]
+    partial class DomainTablesAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -380,8 +382,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("Contry of origin");
 
                     b.Property<DateTime>("CreatedOn")
@@ -390,8 +391,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("Description Of Wine and origin");
 
                     b.Property<string>("ImageUrl")
@@ -401,8 +401,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("This is for the name of wine");
 
                     b.Property<decimal>("Price")
@@ -414,8 +413,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.Property<string>("Region")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("Region where is created");
 
                     b.Property<int>("SupplierId")
