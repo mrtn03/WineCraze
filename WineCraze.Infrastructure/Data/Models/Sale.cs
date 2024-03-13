@@ -15,6 +15,7 @@ namespace WineCraze.Infrastructure.Data.Models
 
         [Required]
         [Comment("Total sum of all sales")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal TotalPrice { get; set; }
 
         [Required]

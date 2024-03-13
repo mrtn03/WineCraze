@@ -10,18 +10,22 @@ namespace WineCraze.Infrastructure.Data.Models
 
         [Required]
         [Comment("Name of Customer")]
+        [MaxLength(Constants.DataConstants.NameCustomerMaxLength)]
         public string Name { get; set; } = string.Empty;
 
         [Required]
         [Comment("Email of Customer")]
+        [MaxLength(Constants.DataConstants.EmailMaxLength)]
         public string Email { get; set; } = string.Empty;
 
         [Required]
         [Comment("Address of Customer")]
+        [MaxLength(Constants.DataConstants.AddressMaxLength)]
         public string Address { get; set; } = string.Empty;
 
         [Required]
         [Comment("Phone number for contact of Customer")]
+        [MaxLength(Constants.DataConstants.PhoneMaxLength)]
         public string PhoneNumber { get; set; } = string.Empty;
 
         

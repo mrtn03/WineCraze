@@ -10,10 +10,12 @@ namespace WineCraze.Infrastructure.Data.Models
 
         [Required]
         [Comment("Title of Report")]
+        [MaxLength(Constants.DataConstants.TitleMaxLength)]
         public string Title { get; set; } = string.Empty;
 
         [Required]
         [Comment("Description of Report")]
+        [MaxLength(Constants.DataConstants.DescriptionMaxLength)]
         public string Description { get; set; } = string.Empty;
 
         [Required]

@@ -10,26 +10,29 @@ namespace WineCraze.Infrastructure.Data.Models
 
         [Required]
         [Comment("Name of Supplier")]
+        [MaxLength(Constants.DataConstants.NameSupplierMaxLength)]
         public string Name { get; set; } = string.Empty;
 
         [Required]
         [Comment("Way for contact")]
+        [MaxLength(Constants.DataConstants.ContactPersonSupplierMaxLength)]
         public string ContactPerson { get; set; } = string.Empty;
 
         [Required]
         [Comment("Email for Contact")]
+        [MaxLength(Constants.DataConstants.EmailMaxLength)]
         public string Email { get; set; } = string.Empty;
 
         [Required]
         [Comment("Phone number for contact")]
+        [MaxLength(Constants.DataConstants.PhoneMaxLength)]
         public string Phone { get; set; } = string.Empty;
 
         [Required]
         [Comment("Address of supplier")]
+        [MaxLength(Constants.DataConstants.AddressMaxLength)]
         public string Address { get; set; } = string.Empty;
 
-        //// Navigation property
-        //// if a supplier has multiple wines
         public ICollection<Wine> Wines { get; set; } = new HashSet<Wine>(); 
 
     }
