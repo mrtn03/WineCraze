@@ -24,10 +24,7 @@ namespace WineCraze.Infrastructure.Data.Models
         [Comment("Phone number for contact of Customer")]
         public string PhoneNumber { get; set; } = string.Empty;
 
-        // Additional properties as needed
-
-        // Navigation properties
-        // For example, if a customer has multiple sales
+        
 
         public ICollection<Sale> Sales { get; set; } = new HashSet<Sale>();
     }

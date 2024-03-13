@@ -39,6 +39,8 @@ namespace WineCraze.Infrastructure.Data.Models
         [Comment("Image of Wine")]
         public string ImageUrl { get; set; } = string.Empty;
 
+
+
         [Comment("Supplier Identification")]
         public int SupplierId { get; set; }
         [ForeignKey(nameof(SupplierId))]
