@@ -27,6 +27,7 @@ namespace WineCraze.Infrastructure.Constants
 
 
         //Wine
+        public const int WineMaxLength = 40;
         public const int CountryMaxLength = 50;
         public const int RegionMaxLength = 50;
 
