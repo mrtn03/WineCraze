@@ -18,6 +18,10 @@ namespace WineCraze.Infrastructure.Data.Models
         [MaxLength(Constants.DataConstants.ContactPersonSupplierMaxLength)]
         public string ContactPerson { get; set; } = string.Empty;
 
+        [Comment("Bulstat For Supplier")]
+        public int Bulstat { get; set; }
+
+
         [Required]
         [Comment("Email for Contact")]
         [MaxLength(Constants.DataConstants.EmailMaxLength)]
@@ -34,6 +38,7 @@ namespace WineCraze.Infrastructure.Data.Models
         public string Address { get; set; } = string.Empty;
 
         public ICollection<Wine> Wines { get; set; } = new HashSet<Wine>(); 
+        public ICollection<Sale> Sales { get; set; } = new HashSet<Sale>(); 
 
     }
 }

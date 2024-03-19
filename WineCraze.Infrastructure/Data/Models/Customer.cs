@@ -28,8 +28,6 @@ namespace WineCraze.Infrastructure.Data.Models
         [MaxLength(Constants.DataConstants.PhoneMaxLength)]
         public string PhoneNumber { get; set; } = string.Empty;
 
-        
-
         public ICollection<Sale> Sales { get; set; } = new HashSet<Sale>();
     }
 }

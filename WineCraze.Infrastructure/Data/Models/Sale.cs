@@ -22,6 +22,8 @@ namespace WineCraze.Infrastructure.Data.Models
         [Comment("Date of sales")]
         public DateTime SaleDate { get; set; }
 
+
+
         [Comment("Wine Identification")]
         public int WineId { get; set; }
         [ForeignKey(nameof(WineId))]
@@ -32,10 +34,19 @@ namespace WineCraze.Infrastructure.Data.Models
         [ForeignKey(nameof(CustomerId))]
         public Customer Customer { get; set; } = null!;
 
+        [Comment("Supplier Identification")]
+        public int SupplierId { get; set; }
+        [ForeignKey(nameof(SupplierId))]
+        public Supplier Supplier { get; set; } = null!;
+        
+        [Comment("Report Identification")]
+        public int ReportId { get; set; }
+        [ForeignKey(nameof(ReportId))]
+        public Report Report { get; set; } = null!;
 
     }
 }
 
 // Summary -  
 
-// Idea is to use it to record sales made by customers, calculate total prices, and store sale dates.
+// Idea is to use it to record sales made by customers and suppliers, calculate total prices, and store sale dates.

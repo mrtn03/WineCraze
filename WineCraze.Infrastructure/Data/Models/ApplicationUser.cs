@@ -1,6 +1,8 @@
-﻿namespace WineCraze.Infrastructure.Data.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace WineCraze.Infrastructure.Data.Models
 {
-    public class ApplicationUser
+    public class ApplicationUser : IdentityUser
     {
     }
 }
