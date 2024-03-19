@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WineCraze.Models;
 
 namespace WineCraze.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,6 +17,20 @@ namespace WineCraze.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        // GET: /Home/About
+        public IActionResult About()
+        {
+            // Render the about page
+            return View();
+        }
+
+        // GET: /Home/Contact
+        public IActionResult Contact()
+        {
+            // Render the contact page
             return View();
         }
 
