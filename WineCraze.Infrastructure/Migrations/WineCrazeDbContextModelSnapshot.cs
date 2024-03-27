@@ -258,7 +258,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("WineCraze.Infrastructure.Data.Models.Report", b =>
@@ -287,7 +287,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reports");
+                    b.ToTable("Reports", (string)null);
                 });
 
             modelBuilder.Entity("WineCraze.Infrastructure.Data.Models.Sale", b =>
@@ -336,7 +336,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasIndex("WineId");
 
-                    b.ToTable("Sales");
+                    b.ToTable("Sales", (string)null);
                 });
 
             modelBuilder.Entity("WineCraze.Infrastructure.Data.Models.Supplier", b =>
@@ -383,7 +383,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("Suppliers", (string)null);
                 });
 
             modelBuilder.Entity("WineCraze.Infrastructure.Data.Models.Wine", b =>
@@ -442,7 +442,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Wines");
+                    b.ToTable("Wines", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
