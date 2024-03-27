@@ -8,6 +8,10 @@ namespace WineCraze.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            //services.AddScoped<IHouseService, HouseService>();
+            //services.AddScoped<IAgentService, AgentService>();
+            //services.AddScoped<IStatisticService, StatisticService>();
+
             return services;
         }
 
@@ -16,6 +20,8 @@ namespace WineCraze.Extensions
             var connectionString = config.GetConnectionString("DefaultConnection");
             services.AddDbContext<WineCrazeDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            //services.AddScoped<IRepository, Repository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
