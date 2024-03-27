@@ -47,6 +47,11 @@ namespace WineCraze.Data
                 .HasForeignKey(s => s.ReportId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<Sale>()
+             .HasOne(s => s.Wine)
+             .WithMany(w => w.Sales)
+             .HasForeignKey(s => s.WineId);
+
 
         }
     }
