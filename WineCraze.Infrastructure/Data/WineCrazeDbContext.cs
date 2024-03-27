@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 using WineCraze.Infrastructure.Data.Models;
+using WineCraze.Infrastructure.Data.SeedDb;
 
 namespace WineCraze.Data
 {
@@ -22,6 +23,12 @@ namespace WineCraze.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.ApplyConfiguration(new ReportConfiguration());
+            modelBuilder.ApplyConfiguration(new SaleConfiguration());
+            modelBuilder.ApplyConfiguration(new SupplierConfiguration());
+            modelBuilder.ApplyConfiguration(new WineConfiguration());
+
             modelBuilder.Entity<Sale>()
                .HasOne(s => s.Customer)
                 .WithMany(c => c.Sales)
@@ -39,42 +46,7 @@ namespace WineCraze.Data
                .WithMany(r => r.Sales)
                 .HasForeignKey(s => s.ReportId)
                 .OnDelete(DeleteBehavior.NoAction);
-            
 
-            //modelBuilder.Entity<Sale>()
-            //    .HasOne(s => s.Customer)
-            //    .WithMany(c => c.Sales)
-            //    .HasForeignKey(s => s.CustomerId);
-
-            //modelBuilder.Entity<Sale>()
-            //    .HasOne(s => s.Supplier)
-            //    .WithMany(su => su.Sales)
-            //    .HasForeignKey(s => s.SupplierId);
-
-            //modelBuilder.Entity<Sale>()
-            //    .HasOne(s => s.Report)
-            //    .WithMany(r => r.Sales)
-            //    .HasForeignKey<Report>(r => r.SaleId);
-
-            //modelBuilder.Entity<Sale>()
-            //    .HasOne(s => s.Wine)
-            //    .WithMany(w => w.Sales)
-            //    .HasForeignKey(s => s.WineId);
-
-            //modelBuilder.Entity<Customer>()
-            //    .HasMany(c => c.Sales)
-            //    .WithOne(s => s.Customer)
-            //    .HasForeignKey(s => s.CustomerId);
-
-            //modelBuilder.Entity<Supplier>()
-            //    .HasMany(su => su.Sales)
-            //    .WithOne(s => s.Supplier)
-            //    .HasForeignKey(s => s.SupplierId);
-
-            //modelBuilder.Entity<Wine>()
-            //    .HasMany(w => w.Sales)
-            //    .WithOne(s => s.Wine)
-            //    .HasForeignKey(s => s.WineId);
 
         }
     }
