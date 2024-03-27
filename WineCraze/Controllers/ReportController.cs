@@ -16,12 +16,14 @@ namespace WineCraze.Controllers
         }
 
         // GET: Report
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
         // GET: Report/Sales
+        [HttpGet]
         public async Task<IActionResult> Sales()
         {
             var sales = await _context.Sales
@@ -34,6 +36,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Report/Inventory
+        [HttpGet]
         public async Task<IActionResult> Inventory()
         {
             var wines = await _context.Wines.ToListAsync();
@@ -41,6 +44,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Report/Profit
+        [HttpGet]
         public async Task<IActionResult> Profit()
         {
             var sales = await _context.Sales

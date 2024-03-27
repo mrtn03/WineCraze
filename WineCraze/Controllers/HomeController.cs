@@ -21,6 +21,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: /Home/About
+        [HttpGet]
         public IActionResult About()
         {
             // Render the about page
@@ -28,6 +29,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: /Home/Contact
+        [HttpGet]
         public IActionResult Contact()
         {
             // Render the contact page

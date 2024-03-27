@@ -17,6 +17,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Supplier
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var suppliers = await _context.Suppliers.ToListAsync();
@@ -24,6 +25,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Supplier/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -44,6 +46,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Supplier/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,6 +96,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Supplier/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

@@ -17,6 +17,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Customer
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var customers = await _context.Customers.ToListAsync();
@@ -24,6 +25,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Customer/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -43,7 +45,9 @@ namespace WineCraze.Controllers
             return View(customer);
         }
 
+
         // GET: Customer/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,6 +97,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Customer/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

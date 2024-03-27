@@ -17,6 +17,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Sales
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var sales = await _context.Sales
@@ -30,6 +31,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Sales/Create
+        [HttpGet]
         public IActionResult Create()
         {
             ViewBag.Customers = _context.Customers.ToList();
@@ -55,6 +57,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Sales/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
