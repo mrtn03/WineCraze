@@ -15,9 +15,9 @@ namespace WineCraze.Infrastructure.Data.Models
         public string Name { get; set; } = string.Empty;
 
         [Required]
-        [Comment("Description Of Wine and origin")]
-        [MaxLength(Constants.DataConstants.DescriptionMaxLength)]
-        public string Description { get; set; } = string.Empty;
+        [Comment("Type Of Wine")]
+        [MaxLength(Constants.DataConstants.TypeOfWine)]
+        public string Type { get; set; } = string.Empty;
 
         [Required]
         [Comment("Contry of origin")]
@@ -31,7 +31,7 @@ namespace WineCraze.Infrastructure.Data.Models
 
         [Required]
         [Comment("Year of origin")]
-        public DateTime CreatedOn { get; set; }
+        public string CreatedOn { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
