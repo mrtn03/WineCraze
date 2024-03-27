@@ -31,7 +31,9 @@ namespace WineCraze.Infrastructure.Constants
         public const int CountryMaxLength = 50;
         public const int RegionMaxLength = 50;
 
+
         public const string PriceMin = "0.00";
+        public const int TypeOfWine = 40;
 
         public const string PriceMax = "2000.00";
 
