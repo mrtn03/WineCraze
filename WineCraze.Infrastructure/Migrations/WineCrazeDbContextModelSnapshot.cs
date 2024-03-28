@@ -258,49 +258,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "",
-                            Email = "john@example.com",
-                            Name = "John Doe",
-                            PhoneNumber = "123-456-7890"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "",
-                            Email = "jane@example.com",
-                            Name = "Jane Smith",
-                            PhoneNumber = "987-654-3210"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "",
-                            Email = "men@example.com",
-                            Name = "Men Gos",
-                            PhoneNumber = "123-634-3110"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "",
-                            Email = "Io@example.com",
-                            Name = "Io Geo",
-                            PhoneNumber = "987-123-3210"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "",
-                            Email = "Len@example.com",
-                            Name = "Len Dos",
-                            PhoneNumber = "456-789-3210"
-                        });
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("WineCraze.Infrastructure.Data.Models.Report", b =>
@@ -329,23 +287,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reports");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "This is the sales report for the first quarter of 2023.",
-                            Title = "Sales Report Q1 2023"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "This is the inventory report for the year 2022.",
-                            Title = "Inventory Report 2022"
-                        });
+                    b.ToTable("Reports", (string)null);
                 });
 
             modelBuilder.Entity("WineCraze.Infrastructure.Data.Models.Sale", b =>
@@ -394,31 +336,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasIndex("WineId");
 
-                    b.ToTable("Sales");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CustomerId = 1,
-                            Quantity = 2,
-                            ReportId = 0,
-                            SaleDate = new DateTime(2024, 3, 27, 17, 10, 34, 977, DateTimeKind.Local).AddTicks(2506),
-                            SupplierId = 1,
-                            TotalPrice = 40.00m,
-                            WineId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CustomerId = 2,
-                            Quantity = 1,
-                            ReportId = 0,
-                            SaleDate = new DateTime(2024, 3, 27, 17, 10, 34, 977, DateTimeKind.Local).AddTicks(2563),
-                            SupplierId = 2,
-                            TotalPrice = 18.50m,
-                            WineId = 2
-                        });
+                    b.ToTable("Sales", (string)null);
                 });
 
             modelBuilder.Entity("WineCraze.Infrastructure.Data.Models.Supplier", b =>
@@ -465,29 +383,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "",
-                            Bulstat = 0,
-                            ContactPerson = "",
-                            Email = "supplierA@example.com",
-                            Name = "Supplier A",
-                            Phone = "123-456-7890"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "",
-                            Bulstat = 0,
-                            ContactPerson = "",
-                            Email = "supplierB@example.com",
-                            Name = "Supplier B",
-                            Phone = "987-654-3210"
-                        });
+                    b.ToTable("Suppliers", (string)null);
                 });
 
             modelBuilder.Entity("WineCraze.Infrastructure.Data.Models.Wine", b =>
@@ -504,10 +400,15 @@ namespace WineCraze.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasComment("Contry of origin");
 
-                    b.Property<string>("CreatedOn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2")
                         .HasComment("Year of origin");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasComment("Description Of Wine and origin");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -537,58 +438,11 @@ namespace WineCraze.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Supplier Identification");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
-                        .HasComment("Type Of Wine");
-
                     b.HasKey("Id");
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Wines");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Country = "",
-                            CreatedOn = "2019",
-                            ImageUrl = "",
-                            Name = "Red Wine",
-                            Price = 20.00m,
-                            Quantity = 0,
-                            Region = "",
-                            SupplierId = 0,
-                            Type = "Red"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Country = "",
-                            CreatedOn = "2020",
-                            ImageUrl = "",
-                            Name = "White Wine",
-                            Price = 18.50m,
-                            Quantity = 0,
-                            Region = "",
-                            SupplierId = 0,
-                            Type = "White"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Country = "",
-                            CreatedOn = "2018",
-                            ImageUrl = "",
-                            Name = "Rosé Wine",
-                            Price = 15.75m,
-                            Quantity = 0,
-                            Region = "",
-                            SupplierId = 0,
-                            Type = "Rosé"
-                        });
+                    b.ToTable("Wines", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
