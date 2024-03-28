@@ -21,14 +21,6 @@ namespace WineCraze.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
-            modelBuilder.ApplyConfiguration(new ReportConfiguration());
-            modelBuilder.ApplyConfiguration(new SaleConfiguration());
-            modelBuilder.ApplyConfiguration(new SupplierConfiguration());
-            modelBuilder.ApplyConfiguration(new WineConfiguration());
-
             modelBuilder.Entity<Sale>()
                .HasOne(s => s.Customer)
                 .WithMany(c => c.Sales)
@@ -52,7 +44,13 @@ namespace WineCraze.Data
              .WithMany(w => w.Sales)
              .HasForeignKey(s => s.WineId);
 
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.ApplyConfiguration(new ReportConfiguration());
+            modelBuilder.ApplyConfiguration(new SaleConfiguration());
+            modelBuilder.ApplyConfiguration(new SupplierConfiguration());
+            modelBuilder.ApplyConfiguration(new WineConfiguration());
 
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

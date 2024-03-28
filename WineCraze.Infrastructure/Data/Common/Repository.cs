@@ -4,71 +4,54 @@ using WineCraze.Data;
 
 namespace WineCraze.Infrastructure.Data.Common
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository : IRepository
     {
-        private readonly WineCrazeDbContext _dbContext;
-        private readonly DbSet<TEntity> _dbSet;
+        private readonly WineCrazeDbContext context;
 
-        public Repository(WineCrazeDbContext dbContext)
+        public Repository(WineCrazeDbContext _context)
         {
-            _dbContext = dbContext;
-            _dbSet = _dbContext.Set<TEntity>();
+            context = _context;
         }
 
-        public async Task<TEntity> GetByIdAsync(int id)
+        private DbSet<T> DbSet<T>() where T : class
         {
-            return await _dbSet.FindAsync(id);
+            return context.Set<T>();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public IQueryable<T> All<T>() where T : class
         {
-            return await _dbSet.ToListAsync();
+            return DbSet<T>();
         }
 
-        public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
+        public IQueryable<T> AllReadOnly<T>() where T : class
         {
-            return await _dbSet.Where(predicate).ToListAsync();
+            return DbSet<T>()
+                .AsNoTracking();
         }
 
-        public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task AddAsync<T>(T entity) where T : class
         {
-            return await _dbSet.SingleOrDefaultAsync(predicate);
+            await DbSet<T>().AddAsync(entity);
         }
 
-        public async Task AddAsync(TEntity entity)
+        public async Task<int> SaveChangesAsync()
         {
-            await _dbSet.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            return await context.SaveChangesAsync();
         }
 
-        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<T?> GetByIdAsync<T>(object id) where T : class
         {
-            await _dbSet.AddRangeAsync(entities);
-            await _dbContext.SaveChangesAsync();
+            return await DbSet<T>().FindAsync(id);
         }
 
-        public async Task RemoveAsync(TEntity entity)
+        public async Task DeleteAsync<T>(object id) where T : class
         {
-            _dbSet.Remove(entity);
-            await _dbContext.SaveChangesAsync();
-        }
+            T? entity = await GetByIdAsync<T>(id);
 
-        public async Task RemoveRangeAsync(IEnumerable<TEntity> entities)
-        {
-            _dbSet.RemoveRange(entities);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(TEntity entity)
-        {
-            _dbSet.Update(entity);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateRangeAsync(IEnumerable<TEntity> entities)
-        {
-            _dbSet.UpdateRange(entities);
-            await _dbContext.SaveChangesAsync();
+            if (entity != null)
+            {
+                DbSet<T>().Remove(entity);
+            }
         }
     }
 }
