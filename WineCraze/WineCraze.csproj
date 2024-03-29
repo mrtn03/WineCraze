@@ -19,8 +19,4 @@
     <ProjectReference Include="..\WineCraze.Core\WineCraze.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-  </ItemGroup>
-
 </Project>

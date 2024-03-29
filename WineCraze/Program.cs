@@ -9,10 +9,9 @@ builder.Services.AddApplicationIdentity(builder.Configuration);
 
 builder.Services.AddControllersWithViews(options =>
 {
-    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+   options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
-
 
 builder.Services.AddApplicationServices();
 
@@ -46,7 +45,48 @@ app.UseEndpoints(endpoints =>
         defaults: new { Controller = "Wine", Action = "Details" }
     );
     endpoints.MapDefaultControllerRoute();
-    endpoints.MapRazorPages();
+   endpoints.MapRazorPages();
 });
 
 app.Run();
+
+
+
+
+
+//builder.Services.AddApplicationServices();
+
+//var app = builder.Build();
+
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseDeveloperExceptionPage();
+//    app.UseMigrationsEndPoint();
+//}
+//else
+//{
+//    app.UseExceptionHandler("/Home/Error/500");
+//    app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
+//    app.UseHsts();
+//}
+
+//app.UseHttpsRedirection();
+//app.UseStaticFiles();
+
+//app.UseRouting();
+
+//app.UseAuthentication();
+//app.UseAuthorization();
+
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllerRoute(
+//        name: "Wine Details",
+//        pattern: "/Wine/Details/{id}/{information}",
+//        defaults: new { Controller = "Wine", Action = "Details" }
+//    );
+//    endpoints.MapDefaultControllerRoute();
+//    endpoints.MapRazorPages();
+//});
+
+//app.Run();

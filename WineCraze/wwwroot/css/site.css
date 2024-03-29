@@ -1,18 +1,194 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+margin : 0;
+padding : 0;
+font : 73% "Trebuchet MS", tahoma, verdana, arial, sans-serif;
+line-height : 1.8em;
+color : #666;
+background : #f0e9dd url(img/body_bg.gif) repeat-y;
+background-position : 50% 0;
+}
+#container {
+width : 700px;
+margin-left : auto;
+margin-right : auto;
+padding : 5px;
+}
+			/*TOP BANNER*/
+#banner {
+height : 200px;
+padding : 5px;
+margin-left : 1px;
+background : url(img/head.jpg) no-repeat;
+}
+#banner h1 {
+margin : 0 10px 0 0;
+padding-top : 50px;
+letter-spacing : 2px;
+font-size : 140%;
+text-align : right;
+}
+			/*MAIN CONTENT*/
+#content {
+padding : 0;
+margin-left : 160px;
+}
+			/*SIDEBAR*/
+#sidebar {
+float : left;
+width : 150px;
+margin : 0 5px 5px 5px;
+padding : 3px;
+border-right : 1px solid #dfd0b9;
+}
+			/*FOOTER*/
+#footer {
+clear : both;
+padding : 5px;
+margin : 0;
+font-size : 0.9em;
+border-top : 1px solid #dfd0b9;
+color : #333;
+background : inherit;
+}
+#footer a:link, #footer a:visited {
+background : inherit;
+color : #333;
+}
+#footer a:hover {
+text-decoration : underline;
+background : inherit;
+color : #663300;
+}
+			/*TYPOGRAPHY*/
+p {
+padding : 3px 15px 0 15px;
+}
+#content h1, #sidebar h1 {
+margin : 5px;
+font-size : 110%;
+text-transform : uppercase;
+letter-spacing : 3px;
+padding : 3px;
+color : #eb6d00;
+background : inherit;
+}
+h2 {
+font-size : 110%;
+padding : 5px;
+margin : 5px;
+letter-spacing : 3px;
+color : #508b4b;
+background : #cfe4cd;
+}
+h3 {
+padding : 3px;
+margin : 0 0 0 0;
+font-size : 0.85em;
+}
+blockquote {
+font-weight : bold;
+font-style : italic;
+color : #b29b35;
+}
+			/*LINKS*/
+a {
+text-decoration : none;
+color : #6cad67;
+background : inherit;
+}
+a:hover {
+text-decoration : underline;
+color : #333;
+background : inherit;
+}
+a img {
+border : 0;
+}
+			/*3 COLUMNS*/
+.intro {
+float : left;
+width : 220px;
+margin : 3px 0 5px 0;
+padding : 5px;
+}
+.intro2 {
+float : left;
+width : 220px;
+margin : 3px 0 5px 0;
+padding : 5px;
+}
+.intro3 {
+float : right;
+width : 220px;
+margin : 3px 0 5px 0;
+padding : 5px;
+}
+			/*SIDE NAVIGATION*/
+#navcontainer {
+width : 150px;
+margin-top : 20px;
+}
+#navcontainer ul {
+margin-left : 0;
+padding-left : 0;
+list-style-type : none;
+}
+#navcontainer a {
+display : block;
+padding : 3px;
+width : 130px;
+background : #cfe4cd;
+color : #666;
+border-bottom : 1px solid #f0e9dd;
+border-left : 8px solid #fbaa69;
+}
+#navcontainer a:link, #navlist a:visited {
+text-decoration : none;
+}
+#navcontainer a:hover {
+border-left : 8px solid #b7d6b4;
+background : #ffa961;
+color : #fff;
+}
+			/*CLASSES*/
+.img {
+float : left;
+padding : 3px;
+margin : 3px;
+}
+.update {
+font-size : 1em;
+background : inherit;
+color : #4f210d;
+}
+.box {
+margin : 20px;
+padding : 5px;
+border : 1px solid #ffa961;
+background : inherit;
+color : #663300;
+}
+			/*SEARCH BOX*/
+.search {
+clear : both;
+padding : 5px 0 5px 0;
+border-top : 1px solid #f0e9dd;
+border-bottom : 1px solid #f0e9dd;
+background : #cfe4cd url(barbg.gif) no-repeat;
+color : #000;
+}
+form {
+margin : 0;
+}
+input.search {
+width : 100px;
+border : none;
+background : url(img/input.gif);
+padding : 4px;
+}
+input.login {
+width : 100px;
+border : none;
+background : url(img/logininput.gif);
+padding : 4px;
 }

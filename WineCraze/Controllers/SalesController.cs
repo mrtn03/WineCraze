@@ -23,7 +23,6 @@ namespace WineCraze.Controllers
             var sales = await _context.Sales
                 .Include(s => s.Customer)
                 .Include(s => s.Supplier)
-                .Include(s => s.Report)
                 .Include(s => s.Wine)
                 .ToListAsync();
 
@@ -68,7 +67,6 @@ namespace WineCraze.Controllers
             var sale = await _context.Sales
                 .Include(s => s.Customer)
                 .Include(s => s.Supplier)
-                .Include(s => s.Report)
                 .Include(s => s.Wine)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
