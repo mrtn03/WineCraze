@@ -15,22 +15,20 @@ namespace WineCraze.Infrastructure.Data.SeedDb
                     Id = 1,
                     Quantity = 5,
                     TotalPrice = 44.00M,
-                    SaleDate = DateTime.Now.AddDays(-7),
-                    WineId = 1, // Sample wine Id
-                    CustomerId = 1, // Sample customer Id
-                    SupplierId = 1, // Sample supplier Id
-                    ReportId = 1 // Sample report Id
+                    SaleDate = DateTime.Now,
+                    WineId = 1,
+                    CustomerId = 1, 
+                    SupplierId = 1,  
                 },
                 new Sale
                 {
                     Id = 2,
                     Quantity = 10,
                     TotalPrice = 54.00M,
-                    SaleDate = DateTime.Now.AddDays(-14),
-                    WineId = 2, // Sample wine Id
-                    CustomerId = 2, // Sample customer Id
-                    SupplierId = 2, // Sample supplier Id
-                    ReportId = 2 // Sample report Id
+                    SaleDate = DateTime.Now,
+                    WineId = 2,
+                    CustomerId = 2, 
+                    SupplierId = 2, 
                 }
             );
 
@@ -45,6 +43,7 @@ namespace WineCraze.Infrastructure.Data.SeedDb
             builder.HasOne(s => s.Wine)
                 .WithMany(x => x.Sales)
                 .HasForeignKey(s => s.WineId);
+
         }
     }
 }

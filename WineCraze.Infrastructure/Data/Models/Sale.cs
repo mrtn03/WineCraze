@@ -39,11 +39,6 @@ namespace WineCraze.Infrastructure.Data.Models
         [ForeignKey(nameof(SupplierId))]
         public Supplier Supplier { get; set; } = null!;
         
-        [Comment("Report Identification")]
-        public int ReportId { get; set; }
-        [ForeignKey(nameof(ReportId))]
-        public Report Report { get; set; } = null!;
-
     }
 }
 
