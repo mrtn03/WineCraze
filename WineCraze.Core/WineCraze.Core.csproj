@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Wine\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

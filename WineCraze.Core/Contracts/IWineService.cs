@@ -1,6 +1,9 @@
-﻿namespace WineCraze.Core.Contracts
+﻿
+
+namespace WineCraze.Core.Contracts
 {
-    internal interface IWineService
+    public interface IWineService
     {
+        
     }
 }
