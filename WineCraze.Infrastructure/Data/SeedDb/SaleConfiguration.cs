@@ -18,15 +18,15 @@ namespace WineCraze.Infrastructure.Data.SeedDb
             );
 
             builder.HasOne(s => s.Customer)
-            .WithMany()
+            .WithMany(x => x.Sales)
             .HasForeignKey(s => s.CustomerId);
 
             builder.HasOne(s => s.Supplier)
-                .WithMany()
+                .WithMany(x => x.Sales)
                 .HasForeignKey(s => s.SupplierId);
 
             builder.HasOne(s => s.Wine)
-                .WithMany()
+                .WithMany(x => x.Sales)
                 .HasForeignKey(s => s.WineId);
         }
     }
