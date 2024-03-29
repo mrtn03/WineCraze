@@ -17,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Constants\" />
-    <Folder Include="ViewModels\" />
+    <Folder Include="Models\Wine\" />
   </ItemGroup>
 
 </Project>
