@@ -7,7 +7,7 @@ using WineCraze.Infrastructure.Data.Models;
 namespace WineCraze.Controllers
 {
     [Authorize]
-    public class InventoryController : Controller
+    public class InventoryController : BaseController
     {
         private readonly WineCrazeDbContext _context;
 

@@ -5,7 +5,7 @@ using WineCraze.Infrastructure.Data.Models;
 
 namespace WineCraze.Controllers
 {
-    public class WineController : Controller
+    public class WineController : BaseController
     {
         private readonly WineCrazeDbContext _context;
 

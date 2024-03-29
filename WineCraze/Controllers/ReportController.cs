@@ -6,7 +6,7 @@ using WineCraze.Data;
 namespace WineCraze.Controllers
 {
     [Authorize]
-    public class ReportController : Controller
+    public class ReportController : BaseController
     {
         private readonly WineCrazeDbContext _context;
 
