@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WineCraze.Data;
 
@@ -11,9 +12,10 @@ using WineCraze.Data;
 namespace WineCraze.Infrastructure.Migrations
 {
     [DbContext(typeof(WineCrazeDbContext))]
-    partial class WineCrazeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240329092402_DataIniMig")]
+    partial class DataIniMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -402,7 +404,7 @@ namespace WineCraze.Infrastructure.Migrations
                             Id = 1,
                             CustomerId = 1,
                             Quantity = 5,
-                            SaleDate = new DateTime(2024, 3, 29, 11, 31, 25, 462, DateTimeKind.Local).AddTicks(2693),
+                            SaleDate = new DateTime(2024, 3, 29, 11, 24, 1, 806, DateTimeKind.Local).AddTicks(8547),
                             SupplierId = 1,
                             TotalPrice = 44.00m,
                             WineId = 1
@@ -412,7 +414,7 @@ namespace WineCraze.Infrastructure.Migrations
                             Id = 2,
                             CustomerId = 2,
                             Quantity = 10,
-                            SaleDate = new DateTime(2024, 3, 29, 11, 31, 25, 462, DateTimeKind.Local).AddTicks(2744),
+                            SaleDate = new DateTime(2024, 3, 29, 11, 24, 1, 806, DateTimeKind.Local).AddTicks(8595),
                             SupplierId = 2,
                             TotalPrice = 54.00m,
                             WineId = 2
