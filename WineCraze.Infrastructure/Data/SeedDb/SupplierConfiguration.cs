@@ -15,8 +15,8 @@ namespace WineCraze.Infrastructure.Data.SeedDb
         {
             
             builder.HasData(
-                new Supplier { Id = 1, Name = "Supplier A", Email = "supplierA@example.com", Phone = "123-456-7890" },
-                new Supplier { Id = 2, Name = "Supplier B", Email = "supplierB@example.com", Phone = "987-654-3210" }
+                new Supplier { Id = 1, Name = "Supplier A", ContactPerson = "supplierA@example.com", Bulstat = 130275868 },
+                new Supplier { Id = 2, Name = "Supplier B", ContactPerson = "supplierB@example.com", Bulstat = 205774397 }
             );
         }
     }

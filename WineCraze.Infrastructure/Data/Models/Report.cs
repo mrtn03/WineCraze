@@ -20,7 +20,7 @@ namespace WineCraze.Infrastructure.Data.Models
 
         [Required]
         [Comment("Date of creation")]
-        public DateTime DateCreated { get; set; }
+        public string DateCreated { get; set; } = string.Empty;
 
         public ICollection<Sale> Sales { get; set; } = new HashSet<Sale>();
     }

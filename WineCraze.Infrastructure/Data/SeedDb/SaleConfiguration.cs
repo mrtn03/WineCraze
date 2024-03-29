@@ -8,13 +8,30 @@ namespace WineCraze.Infrastructure.Data.SeedDb
     {
         public void Configure(EntityTypeBuilder<Sale> builder)
         {
-            
-            builder.HasData(
-                new Sale { Id = 1, SaleDate = DateTime.Now, CustomerId = 1, SupplierId = 1, 
-                    WineId = 1, Quantity = 2, TotalPrice = 40.00m },
 
-                new Sale { Id = 2, SaleDate = DateTime.Now, CustomerId = 2, SupplierId = 2,
-                    WineId = 2, Quantity = 1, TotalPrice = 18.50m }
+            builder.HasData(
+                new Sale
+                {
+                    Id = 1,
+                    Quantity = 5,
+                    TotalPrice = 44.00M,
+                    SaleDate = DateTime.Now.AddDays(-7),
+                    WineId = 1, // Sample wine Id
+                    CustomerId = 1, // Sample customer Id
+                    SupplierId = 1, // Sample supplier Id
+                    ReportId = 1 // Sample report Id
+                },
+                new Sale
+                {
+                    Id = 2,
+                    Quantity = 10,
+                    TotalPrice = 54.00M,
+                    SaleDate = DateTime.Now.AddDays(-14),
+                    WineId = 2, // Sample wine Id
+                    CustomerId = 2, // Sample customer Id
+                    SupplierId = 2, // Sample supplier Id
+                    ReportId = 2 // Sample report Id
+                }
             );
 
             builder.HasOne(s => s.Customer)

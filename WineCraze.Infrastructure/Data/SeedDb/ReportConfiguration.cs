@@ -11,10 +11,13 @@ namespace WineCraze.Infrastructure.Data.SeedDb
             
             builder.HasData(
                 new Report { Id = 1, Title = 
-                "Sales Report Q1 2023", Description = "This is the sales report for the first quarter of 2023." },
+                "Sales Report Q1 2023", Description = "This is the sales report for the first quarter of 2023.",
+                    DateCreated = "2023"
+                },
 
                 new Report { Id = 2, Title = 
-                "Inventory Report 2022", Description = "This is the inventory report for the year 2022." }
+                "Inventory Report 2022", Description = "This is the inventory report for the year 2022.", 
+                    DateCreated = "2022"}
             );
         }
     }
