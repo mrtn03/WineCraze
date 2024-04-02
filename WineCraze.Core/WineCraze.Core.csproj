@@ -16,12 +16,4 @@
     <ProjectReference Include="..\WineCraze.Infrastructure\WineCraze.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Customer\" />
-    <Folder Include="Models\Supplier\" />
-    <Folder Include="Models\Report\" />
-    <Folder Include="Models\Sale\" />
-    <Folder Include="Models\Wine\" />
-  </ItemGroup>
-
 </Project>
