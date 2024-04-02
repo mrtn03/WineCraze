@@ -100,7 +100,7 @@ namespace WineCraze.Controllers
         }
     }
 }
-   
+ 
 
 // Summary - Handles user authentication and authorization, including login,
 // registration, and managing user roles.
