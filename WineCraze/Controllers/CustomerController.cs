@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WineCraze.Core.Models.Customer;
 using WineCraze.Data;
 using WineCraze.Infrastructure.Data.Models;
 
@@ -9,119 +10,63 @@ namespace WineCraze.Controllers
     [Authorize]
     public class CustomerController : BaseController
     {
-//        private readonly WineCrazeDbContext _context;
+        public IActionResult Index()
+        {
+            var customers = new List<CustomerViewModel>
+            {
+                new CustomerViewModel { Id = 1, Name = "John Doe", Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" },
+                new CustomerViewModel { Id = 2, Name = "Jane Smith", Email = "jane@example.com", Address = "456 Elm St", PhoneNumber = "555-5678" }
+            };
 
-//        public CustomerController(WineCrazeDbContext context)
-//        {
-//            _context = context;
-//        }
+            return View(customers);
+        }
 
-//        // GET: Customer
-//        [HttpGet]
-//        public async Task<IActionResult> Index()
-//        {
-//            var customers = await _context.Customers.ToListAsync();
-//            return View(customers);
-//        }
+        public IActionResult Details(int id)
+        {
+            var customer = new CustomerViewModel { Id = id, Name = "John Doe", Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" };
 
-//        // GET: Customer/Create
-//        [HttpGet]
-//        public IActionResult Create()
-//        {
-//            return View();
-//        }
+            return View(customer);
+        }
 
-//        // POST: Customer/Create
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> Create([Bind("Id,Name,Email,Phone")] Customer customer)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                _context.Add(customer);
-//                await _context.SaveChangesAsync();
-//                return RedirectToAction(nameof(Index));
-//            }
-//            return View(customer);
-//        }
+        public IActionResult Create()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult Create(CustomerViewModel model)
+        {
+            return RedirectToAction("Index");
+        }
 
-//        // GET: Customer/Edit/5
-//        [HttpGet]
-//        public async Task<IActionResult> Edit(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return NotFound();
-//            }
+        public IActionResult Edit(int id)
+        {
+            var customer = new CustomerViewModel { Id = id, Name = "John Doe", Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" };
 
-//            var customer = await _context.Customers.FindAsync(id);
-//            if (customer == null)
-//            {
-//                return NotFound();
-//            }
-//            return View(customer);
-//        }
+            return View(customer);
+        }
 
-//        // POST: Customer/Edit/5
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Phone")] Customer customer)
-//        {
-//            if (id != customer.Id)
-//            {
-//                return NotFound();
-//            }
+        [HttpPost]
+        public IActionResult Edit(CustomerViewModel model)
+        {
+            return RedirectToAction("Index");
+        }
 
-//            if (ModelState.IsValid)
-//            {
-//                try
-//                {
-//                    _context.Update(customer);
-//                    await _context.SaveChangesAsync();
-//                }
-//                catch (DbUpdateConcurrencyException)
-//                {
-//                    if (!CustomerExists(customer.Id))
-//                    {
-//                        return NotFound();
-//                    }
-//                    else
-//                    {
-//                        throw;
-//                    }
-//                }
-//                return RedirectToAction(nameof(Index));
-//            }
-//            return View(customer);
-//        }
+        public IActionResult Delete(int id)
+        {
+            var customer = new CustomerViewModel { Id = id, Name = "John Doe", Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" };
 
-//        // GET: Customer/Details/5
-//        [HttpGet]
-//        public async Task<IActionResult> Details(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return NotFound();
-//            }
+            return View(customer);
+        }
 
-//            var customer = await _context.Customers
-//                .FirstOrDefaultAsync(m => m.Id == id);
-
-//            if (customer == null)
-//            {
-//                return NotFound();
-//            }
-
-//            return View(customer);
-//        }
-
-//        private bool CustomerExists(int id)
-//        {
-//            return _context.Customers.Any(e => e.Id == id);
-//        }
-//    }
-//}
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            return RedirectToAction("Index");
+        }
+    }
+}
+      
 
 // Summary - Manages customers, allowing for adding new customers, editing customer details,
 // and viewing customer information.

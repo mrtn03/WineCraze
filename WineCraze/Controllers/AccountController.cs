@@ -9,29 +9,29 @@ namespace WineCraze.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IAccountService _accountService;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager,
+        public AccountController(
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+            SignInManager<ApplicationUser> signInManager,
+            IAccountService accountService)
         {
-            _signInManager = signInManager;
             _userManager = userManager;
-            _roleManager = roleManager;
+            _signInManager = signInManager;
+            _accountService = accountService;
         }
 
-        // GET: /Account/Login
-        [HttpGet]
+        [AllowAnonymous] // Allow anonymous access to this action
         public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
-        // POST: /Account/Login
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
@@ -49,15 +49,14 @@ namespace WineCraze.Controllers
             return View(model);
         }
 
-        // GET: /Account/Register
-        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: /Account/Register
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -68,7 +67,7 @@ namespace WineCraze.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
                 foreach (var error in result.Errors)
                 {
@@ -78,13 +77,19 @@ namespace WineCraze.Controllers
             return View(model);
         }
 
-        // GET: /Account/Logout
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
         private IActionResult RedirectToLocal(string returnUrl)
@@ -95,12 +100,12 @@ namespace WineCraze.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
     }
 }
- 
+
 
 // Summary - Handles user authentication and authorization, including login,
 // registration, and managing user roles.
