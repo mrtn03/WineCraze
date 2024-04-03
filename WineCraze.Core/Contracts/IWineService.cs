@@ -11,9 +11,9 @@ namespace WineCraze.Core.Contracts
     {
         Task<IEnumerable<Wine>> GetAllWinesAsync();
         Task<Wine> GetWineByIdAsync(int id);
-        Task<IEnumerable<Wine>> GetLastThreeWinesAsync();
-        Task AddWineAsync(Wine wine);
-        Task UpdateWineAsync(Wine wine);
-        Task DeleteWineAsync(int id);
+        Task<IEnumerable<Wine>> GetLastThreeWineAsync();
+        Task AddAsync(Wine wine);
+        Task UpdateAsync(Wine wine);
+        Task DeleteAsync(int id);
     }
 }

@@ -16,5 +16,9 @@ namespace WineCraze.Infrastructure.Data.Common
         Task<T?> GetByIdAsync<T>(object id) where T : class;
 
         Task DeleteAsync<T>(object id) where T : class;
+
+        IQueryable<T> GetAllWinesAsync<T>() where T : class;
+
+        Task UpdateAsync<T>(T entity) where T : class;
     }
 }

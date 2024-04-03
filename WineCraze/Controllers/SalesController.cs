@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WineCraze.Core.Contracts;
 using WineCraze.Core.Models.Sale;
-using WineCraze.Data;
-using WineCraze.Infrastructure.Data.Models;
 
 namespace WineCraze.Controllers
 {
