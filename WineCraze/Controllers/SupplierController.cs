@@ -1,31 +1,42 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WineCraze.Data;
-using WineCraze.Infrastructure.Data.Models;
+using WineCraze.Core.Contracts;
+using WineCraze.Core.Models.Supplier;
 
 namespace WineCraze.Controllers
 {
     [Authorize]
     public class SupplierController : BaseController
     {
-        private readonly WineCrazeDbContext _context;
+        private readonly ISupplierService _supplierService;
 
-        public SupplierController(WineCrazeDbContext context)
+        public SupplierController(ISupplierService supplierService)
         {
-            _context = context;
+            _supplierService = supplierService;
         }
 
         // GET: Supplier
-        [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var suppliers = await _context.Suppliers.ToListAsync();
+            var suppliers = _supplierService.GetAllSuppliers();
             return View(suppliers);
         }
 
+        // GET: Supplier/Details/5
+        public IActionResult Details(int id)
+        {
+            try
+            {
+                var supplier = _supplierService.GetSupplierById(id);
+                return View(supplier);
+            }
+            catch (InvalidOperationException)
+            {
+                return NotFound();
+            }
+        }
+
         // GET: Supplier/Create
-        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -34,40 +45,36 @@ namespace WineCraze.Controllers
         // POST: Supplier/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,Email,Phone")] Supplier supplier)
+        public IActionResult Create(SupplierViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(supplier);
-                await _context.SaveChangesAsync();
+                _supplierService.CreateSupplier(viewModel);
                 return RedirectToAction(nameof(Index));
             }
-            return View(supplier);
+            return View(viewModel);
         }
 
         // GET: Supplier/Edit/5
-        [HttpGet]
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null)
+            try
+            {
+                var supplier = _supplierService.GetSupplierById(id);
+                return View(supplier);
+            }
+            catch (InvalidOperationException)
             {
                 return NotFound();
             }
-
-            var supplier = await _context.Suppliers.FindAsync(id);
-            if (supplier == null)
-            {
-                return NotFound();
-            }
-            return View(supplier);
         }
 
         // POST: Supplier/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Email,Phone")] Supplier supplier)
+        public IActionResult Edit(int id, SupplierViewModel viewModel)
         {
-            if (id != supplier.Id)
+            if (id != viewModel.Id)
             {
                 return NotFound();
             }
@@ -76,46 +83,45 @@ namespace WineCraze.Controllers
             {
                 try
                 {
-                    _context.Update(supplier);
-                    await _context.SaveChangesAsync();
+                    _supplierService.UpdateSupplier(viewModel);
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (InvalidOperationException)
                 {
-                    if (!SupplierExists(supplier.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(supplier);
+            return View(viewModel);
         }
 
-        // GET: Supplier/Details/5
-        [HttpGet]
-        public async Task<IActionResult> Details(int? id)
+        // GET: Supplier/Delete/5
+        public IActionResult Delete(int id)
         {
-            if (id == null)
+            try
+            {
+                var supplier = _supplierService.GetSupplierById(id);
+                return View(supplier);
+            }
+            catch (InvalidOperationException)
             {
                 return NotFound();
             }
+        }
 
-            var supplier = await _context.Suppliers.FirstOrDefaultAsync(m => m.Id == id);
-            if (supplier == null)
+        // POST: Supplier/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                _supplierService.DeleteSupplier(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (InvalidOperationException)
             {
                 return NotFound();
             }
-
-            return View(supplier);
-        }
-
-        private bool SupplierExists(int id)
-        {
-            return _context.Suppliers.Any(e => e.Id == id);
         }
     }
 }

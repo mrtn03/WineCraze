@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using WineCraze.Core.Contracts;
 using WineCraze.Models;
 
 namespace WineCraze.Controllers
@@ -9,42 +10,38 @@ namespace WineCraze.Controllers
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IWineService _wineService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IWineService wineService)
         {
             _logger = logger;
+            _wineService = wineService;
         }
 
-        public IActionResult Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            // Retrieve the last three wines asynchronously
+            var model = await _wineService.GetLastThreeWinesAsync();
+
+            // Pass the model to the view
+            return View(model);
         }
 
-        // GET: /Home/About
-        [HttpGet]
-        public IActionResult About()
-        {
-            // Render the about page
-            return View();
-        }
-
-        // GET: /Home/Contact
-        [HttpGet]
-        public IActionResult Contact()
-        {
-            // Render the contact page
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int statusCode)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Handle specific error statuses
+            switch (statusCode)
+            {
+                case 400:
+                    return View("Error400");
+                case 401:
+                    return View("Error401");
+                default:
+                    return View();
+            }
         }
     }
 }

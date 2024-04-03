@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WineCraze.Core.Contracts;
+using WineCraze.Core.Models.Sale;
 using WineCraze.Data;
 using WineCraze.Infrastructure.Data.Models;
 
@@ -9,78 +11,42 @@ namespace WineCraze.Controllers
     [Authorize]
     public class SalesController : BaseController
     {
-        private readonly WineCrazeDbContext _context;
+        private readonly ISaleService _saleService;
 
-        public SalesController(WineCrazeDbContext context)
+        public SalesController(ISaleService saleService)
         {
-            _context = context;
+            _saleService = saleService;
         }
 
         // GET: Sales
-        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var sales = await _context.Sales
-                .Include(s => s.Customer)
-                .Include(s => s.Supplier)
-                .Include(s => s.Wine)
-                .ToListAsync();
-
+            var sales = await _saleService.GetAllSalesAsync();
             return View(sales);
         }
 
         // GET: Sales/Create
-        [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Customers = _context.Customers.ToList();
-            ViewBag.Suppliers = _context.Suppliers.ToList();
-            ViewBag.Wines = _context.Wines.ToList();
-
+            // Populate dropdowns with related entities if needed
             return View();
         }
 
         // POST: Sales/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CustomerId,SupplierId,ReportId,WineId,Quantity,TotalPrice")] Sale sale)
+        public async Task<IActionResult> Create(SaleViewModel saleViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(sale);
-                await _context.SaveChangesAsync();
+                await _saleService.CreateSaleAsync(saleViewModel);
                 return RedirectToAction(nameof(Index));
             }
-
-            return View(sale);
+            return View(saleViewModel);
         }
 
-        // GET: Sales/Details/5
-        [HttpGet]
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var sale = await _context.Sales
-                .Include(s => s.Customer)
-                .Include(s => s.Supplier)
-                .Include(s => s.Wine)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (sale == null)
-            {
-                return NotFound();
-            }
-
-            return View(sale);
-        }
+        // Implement other action methods
     }
 }
 
-
-
-// Summary - Handles sales-related actions such as creating sales,
-// viewing sales history, and generating sales reports.
+// Summary - Handles sales-related actions such as creating sales, viewing sales history, and generating sales reports.

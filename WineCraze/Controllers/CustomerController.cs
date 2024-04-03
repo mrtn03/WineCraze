@@ -1,15 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using WineCraze.Core.Contracts;
 using WineCraze.Core.Models.Customer;
-using WineCraze.Data;
-using WineCraze.Infrastructure.Data.Models;
 
 namespace WineCraze.Controllers
 {
     [Authorize]
     public class CustomerController : BaseController
     {
+        private readonly ICustomerService _customerService;
+
+        public CustomerController(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
+
         public IActionResult Index()
         {
             var customers = new List<CustomerViewModel>
