@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WineCraze.Core.Contracts;
+using WineCraze.Core.Services;
 using WineCraze.Data;
 
 namespace WineCraze.Extensions
@@ -8,9 +10,8 @@ namespace WineCraze.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            //services.AddScoped<IHouseService, HouseService>();
-            //services.AddScoped<IAgentService, AgentService>();
-            //services.AddScoped<IStatisticService, StatisticService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ICustomerService, CustomerService>();
 
             return services;
         }
