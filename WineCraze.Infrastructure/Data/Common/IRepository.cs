@@ -1,14 +1,20 @@
 ﻿using System.Linq.Expressions;
+using WineCraze.Infrastructure.Data.Models;
 
 namespace WineCraze.Infrastructure.Data.Common
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository
     {
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
-        Task<T> GetByIdAsync(int id);
-        Task<T> AddAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        IQueryable<T> All<T>() where T : class;
+
+        IQueryable<T> AllReadOnly<T>() where T : class;
+
+        Task AddAsync<T>(T entity) where T : class;
+
+        Task<int> SaveChangesAsync();
+
+        Task<T?> GetByIdAsync<T>(object id) where T : class;
+
+        Task DeleteAsync<T>(object id) where T : class;
     }
 }
