@@ -4,54 +4,47 @@ using WineCraze.Data;
 
 namespace WineCraze.Infrastructure.Data.Common
 {
-    public class Repository : IRepository
+    public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly WineCrazeDbContext context;
+        protected readonly WineCrazeDbContext _context;
 
-        public Repository(WineCrazeDbContext _context)
+        public Repository(WineCrazeDbContext context)
         {
-            context = _context;
+            _context = context;
         }
 
-        private DbSet<T> DbSet<T>() where T : class
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return context.Set<T>();
+            return await _context.Set<T>().ToListAsync();
         }
 
-        public IQueryable<T> All<T>() where T : class
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
         {
-            return DbSet<T>();
+            return await _context.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public IQueryable<T> AllReadOnly<T>() where T : class
+        public async Task<T> GetByIdAsync(int id)
         {
-            return DbSet<T>()
-                .AsNoTracking();
+            return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task AddAsync<T>(T entity) where T : class
+        public async Task<T> AddAsync(T entity)
         {
-            await DbSet<T>().AddAsync(entity);
+            await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public async Task<int> SaveChangesAsync()
+        public async Task UpdateAsync(T entity)
         {
-            return await context.SaveChangesAsync();
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<T?> GetByIdAsync<T>(object id) where T : class
+        public async Task DeleteAsync(T entity)
         {
-            return await DbSet<T>().FindAsync(id);
-        }
-
-        public async Task DeleteAsync<T>(object id) where T : class
-        {
-            T? entity = await GetByIdAsync<T>(id);
-
-            if (entity != null)
-            {
-                DbSet<T>().Remove(entity);
-            }
+            _context.Set<T>().Remove(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }
