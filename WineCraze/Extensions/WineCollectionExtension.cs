@@ -29,7 +29,7 @@ namespace WineCraze.Extensions
             services.AddDbContext<WineCrazeDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            //services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IRepository, Repository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
