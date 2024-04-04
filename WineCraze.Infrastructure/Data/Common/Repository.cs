@@ -3,7 +3,7 @@ using WineCraze.Data;
 
 namespace WineCraze.Infrastructure.Data.Common
 {
-    public class Repository<T> : IRepository
+    public class Repository : IRepository
     {
         private readonly DbContext context;
 
@@ -51,16 +51,6 @@ namespace WineCraze.Infrastructure.Data.Common
             {
                 DbSet<T>().Remove(entity);
             }
-        }
-
-        public IQueryable<T1> GetAllWinesAsync<T1>() where T1 : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync<T1>(T1 entity) where T1 : class
-        {
-            throw new NotImplementedException();
         }
     }
 }

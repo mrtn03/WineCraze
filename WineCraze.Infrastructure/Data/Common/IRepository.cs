@@ -1,7 +1,4 @@
-﻿using System.Linq.Expressions;
-using WineCraze.Infrastructure.Data.Models;
-
-namespace WineCraze.Infrastructure.Data.Common
+﻿namespace WineCraze.Infrastructure.Data.Common
 {
     public interface IRepository
     {
@@ -16,9 +13,5 @@ namespace WineCraze.Infrastructure.Data.Common
         Task<T?> GetByIdAsync<T>(object id) where T : class;
 
         Task DeleteAsync<T>(object id) where T : class;
-
-        IQueryable<T> GetAllWinesAsync<T>() where T : class;
-
-        Task UpdateAsync<T>(T entity) where T : class;
     }
 }
