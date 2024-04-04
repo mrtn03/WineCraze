@@ -7,11 +7,11 @@ namespace WineCraze.Core.Services
 {
     public class SupplierService : ISupplierService
     {
-        private readonly IRepository _supp;
+        private readonly IRepository supp;
 
-        public SupplierService(IRepository _supp)
+        public SupplierService(IRepository _repository)
         {
-            _supp = _supp;
+            supp = _repository;
         }
 
         public IEnumerable<SupplierViewModel> GetAllSuppliers()

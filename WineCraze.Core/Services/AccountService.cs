@@ -1,9 +1,17 @@
 ﻿using WineCraze.Core.Contracts;
+using WineCraze.Infrastructure.Data.Common;
 
 namespace WineCraze.Core.Services
 {
     public class AccountService : IAccountService
     {
+        private readonly IRepository account;
+
+        public AccountService(IRepository _repository)
+        {
+            account = _repository;
+        }
+
 
         public async Task<bool> LoginAsync(string username, string password)
         {

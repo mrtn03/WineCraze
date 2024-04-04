@@ -1,22 +1,24 @@
 ﻿using WineCraze.Core.Contracts;
 using WineCraze.Core.Models.InventoryOrWine;
 using WineCraze.Data;
+using WineCraze.Infrastructure.Data.Common;
 using WineCraze.Infrastructure.Data.Models;
 
 namespace WineCraze.Core.Services
 {
     public class InventoryService : IInventoryService
     {
-        private readonly WineCrazeDbContext _context;
+        private readonly IRepository inventory;
 
-        public InventoryService(WineCrazeDbContext context)
+        public InventoryService(IRepository _repository)
         {
-            _context = context;
+            inventory = _repository;
         }
+
 
         public IEnumerable<WineViewModel> GetAllWines()
         {
-            return _context.Wines.Select(w => new WineViewModel
+            return inventory.Wines.Select(w => new WineViewModel
             {
                 Id = w.Id,
                 Name = w.Name,
@@ -33,7 +35,7 @@ namespace WineCraze.Core.Services
 
         public WineViewModel GetWineById(int id)
         {
-            var wine = _context.Wines.Find(id);
+            var wine = inventory.Wines.Find(id);
 
             if (wine == null)
             {
@@ -70,13 +72,13 @@ namespace WineCraze.Core.Services
                 SupplierId = viewModel.SupplierId
             };
 
-            _context.Wines.Add(wine);
-            _context.SaveChanges();
+            inventory.Wines.Add(wine);
+            inventory.SaveChanges();
         }
 
         public void UpdateWine(WineViewModel viewModel)
         {
-            var wine = _context.Wines.Find(viewModel.Id);
+            var wine = inventory.Wines.Find(viewModel.Id);
 
             if (wine == null)
             {
@@ -93,20 +95,20 @@ namespace WineCraze.Core.Services
             wine.ImageUrl = viewModel.ImageUrl;
             wine.SupplierId = viewModel.SupplierId;
 
-            _context.SaveChanges();
+            inventory.SaveChanges();
         }
 
         public void DeleteWine(int id)
         {
-            var wine = _context.Wines.Find(id);
+            var wine = inventory.Wines.Find(id);
 
             if (wine == null)
             {
                 throw new InvalidOperationException($"Wine with ID {id} not found.");
             }
 
-            _context.Wines.Remove(wine);
-            _context.SaveChanges();
+            inventory.Wines.Remove(wine);
+            inventory.SaveChanges();
         }
     }
 }

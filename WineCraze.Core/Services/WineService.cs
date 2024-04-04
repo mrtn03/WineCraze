@@ -7,21 +7,21 @@ namespace WineCraze.Core.Services
 {
     public class WineService : IWineService
     {
-        private readonly IRepository _wineRepository;
+        private readonly IRepository wines;
 
         public WineService(IRepository _wineRepository)
         {
-            _wineRepository = _wineRepository;
+            wines = _wineRepository;
         }
 
         public async Task<IEnumerable<Wine>> GetAllWinesAsync()
         {
-            return await _wineRepository.GetAllWinesAsync();
+            return await wines.GetAllWinesAsync();
         }
 
         public async Task<Wine> GetByIdAsync(int id)
         {
-            return await _wineRepository.GetByIdAsync(id);
+            return await wines.GetByIdAsync(id);
         }
 
         public async Task<IEnumerable<Wine>> GetLastThreeWinesAsync()
@@ -32,17 +32,17 @@ namespace WineCraze.Core.Services
 
         public async Task AddWineAsync(Wine wine)
         {
-            await _wineRepository.AddAsync(wine);
+            await wines.AddAsync(wine);
         }
 
         public async Task UpdateWineAsync(Wine wine)
         {
-            await _wineRepository.UpdateAsync(wine);
+            await wines.UpdateAsync(wine);
         }
 
         public async Task DeleteAsync(int id)
         {
-            object value = await _wineRepository.DeleteAsync(id);
+            object value = await wines.DeleteAsync(id);
         }
 
         public Task<Wine> GetWineByIdAsync(int id)

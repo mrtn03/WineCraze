@@ -1,10 +1,18 @@
 ﻿using WineCraze.Core.Contracts;
 using WineCraze.Core.Models.Report;
+using WineCraze.Infrastructure.Data.Common;
 
 namespace WineCraze.Core.Services
 {
     public class ReportService : IReportService
     {
+        private readonly IRepository report;
+
+        public ReportService(IRepository _repository)
+        {
+            report = _repository;
+        }
+
         public async Task<List<ReportViewModel>> GetAllReportsAsync()
         {
             // Implement logic to retrieve all reports from data source

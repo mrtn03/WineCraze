@@ -9,16 +9,16 @@ namespace WineCraze.Core.Services
 {
     public class SaleService : ISaleService
     {
-        private readonly IRepository _sale;
+        private readonly IRepository sale;
 
-        public SaleService(IRepository _sale)
+        public SaleService(IRepository _repository)
         {
-            _sale = _sale;
+            sale = _repository;
         }
 
         public async Task<IEnumerable<SaleViewModel>> GetAllSalesAsync()
         {
-            var sales = await _sale.Sales
+            var sales = await sale.Sales
                 .Select(s => new SaleViewModel
                 {
                     Id = s.Id,
@@ -44,13 +44,13 @@ namespace WineCraze.Core.Services
                 TotalPrice = saleViewModel.TotalPrice
             };
 
-            _sale.Sales.Add(sale);
-            await _sale.SaveChangesAsync();
+            sale.Sales.Add(sale);
+            await sale.SaveChangesAsync();
         }
 
         public async Task<SaleViewModel> GetSaleByIdAsync(int id)
         {
-            var sale = await _sale.Sales
+            var sale = await sale.Sales
                 .Where(s => s.Id == id)
                 .Select(s => new SaleViewModel
                 {
@@ -68,7 +68,7 @@ namespace WineCraze.Core.Services
 
         public async Task UpdateSaleAsync(SaleViewModel saleViewModel)
         {
-            var sale = await _sale.Sales.FindAsync(saleViewModel.Id);
+            var sale = await sale.Sales.FindAsync(saleViewModel.Id);
             if (sale == null)
             {
                 throw new ArgumentException("Sale not found");
@@ -80,7 +80,7 @@ namespace WineCraze.Core.Services
             sale.Quantity = saleViewModel.Quantity;
             sale.TotalPrice = saleViewModel.TotalPrice;
 
-            await _sale.SaveChangesAsync();
+            await sale.SaveChangesAsync();
         }
 
         public async Task DeleteSaleAsync(int id)
@@ -91,8 +91,8 @@ namespace WineCraze.Core.Services
                 throw new ArgumentException("Sale not found");
             }
 
-            _sale.Sales.Remove(sale);
-            await _sale.SaveChangesAsync();
+            sale.Sales.Remove(sale);
+            await sale.SaveChangesAsync();
         }
     }
 }
