@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WineCraze.Data;
+using WineCraze.Infrastructure.Data.Models;
 
 namespace WineCraze.Infrastructure.Data.Common
 {
@@ -51,6 +52,41 @@ namespace WineCraze.Infrastructure.Data.Common
             {
                 DbSet<T>().Remove(entity);
             }
+        }
+
+        public IQueryable<Customer> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Customer> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddAsync(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddAsync(Wine wine)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Wine wine)
+        {
+            throw new NotImplementedException();
         }
     }
 }

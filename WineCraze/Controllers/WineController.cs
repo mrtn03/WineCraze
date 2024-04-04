@@ -16,72 +16,97 @@ namespace WineCraze.Controllers
             _wineService = wineService;
         }
 
-        // GET: /Inventory
-        public IActionResult Index()
+        // GET: Wine
+        public async Task<IActionResult> Index()
         {
-            var wines = _wineService.GetAllWines();
+            var wines = await _wineService.GetAllWinesAsync();
             return View(wines);
         }
 
-        // GET: /Inventory/Create
+        // GET: Wine/Details/5
+        public async Task<IActionResult> Details(int id)
+        {
+            var wine = await _wineService.GetWineByIdAsync(id);
+            if (wine == null)
+            {
+                return NotFound();
+            }
+            return View(wine);
+        }
+
+        // GET: Wine/Create
         public IActionResult Create()
         {
-            var viewModel = new WineViewModel();
-            return View(viewModel);
+            return View();
         }
 
-        // POST: /Inventory/Create
+        // POST: Wine/Create
         [HttpPost]
-        public IActionResult Create(WineViewModel viewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(WineViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _wineService.CreateWine(viewModel);
-                return RedirectToAction("Index");
+                await _wineService.AddWineAsync(viewModel);
+                return RedirectToAction(nameof(Index));
             }
             return View(viewModel);
         }
 
-        // GET: /Inventory/Edit/5
-        public IActionResult Edit(int id)
+        // GET: Wine/Edit/5
+        public async Task<IActionResult> Edit(int id)
         {
-            var viewModel = _wineService.GetWineById(id);
-            if (viewModel == null)
+            var wine = await _wineService.GetWineByIdAsync(id);
+            if (wine == null)
             {
                 return NotFound();
             }
-            return View(viewModel);
+            return View(wine);
         }
 
-        // POST: /Inventory/Edit/5
+        // POST: Wine/Edit/5
         [HttpPost]
-        public IActionResult Edit(int id, WineViewModel viewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, WineViewModel viewModel)
         {
+            if (id != viewModel.Id)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                _wineService.UpdateWine(viewModel);
-                return RedirectToAction("Index");
+                try
+                {
+                    await _wineService.UpdateWineAsync(viewModel);
+                }
+                catch (ArgumentException)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction(nameof(Index));
             }
             return View(viewModel);
         }
 
-        // GET: /Inventory/Delete/5
-        public IActionResult Delete(int id)
+        // GET: Wine/Delete/5
+        public async Task<IActionResult> Delete(int id)
         {
-            var viewModel = _wineService.GetWineById(id);
-            if (viewModel == null)
+            var wine = await _wineService.GetWineByIdAsync(id);
+            if (wine == null)
             {
                 return NotFound();
             }
-            return View(viewModel);
+            return View(wine);
         }
 
-        // POST: /Inventory/Delete/5
+        // POST: Wine/Delete/5
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            _wineService.DeleteWine(id);
-            return RedirectToAction("Index");
+            await _wineService.DeleteWineAsync(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

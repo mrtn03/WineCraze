@@ -21,11 +21,7 @@ namespace WineCraze.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            // Retrieve the last three wines asynchronously
-            var model = await _wineService.GetLastThreeWinesAsync();
-
-            // Pass the model to the view
-            return View(model);
+            return View();
         }
 
         [AllowAnonymous]

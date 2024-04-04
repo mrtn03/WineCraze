@@ -14,7 +14,6 @@ namespace WineCraze.Extensions
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IWineService, WineService>();
-            services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<ISupplierService, SupplierService>();
             services.AddScoped<ISaleService, SaleService>();
             services.AddScoped<IReportService, ReportService>();

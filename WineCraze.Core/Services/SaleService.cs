@@ -16,83 +16,29 @@ namespace WineCraze.Core.Services
             sale = _repository;
         }
 
-        public async Task<IEnumerable<SaleViewModel>> GetAllSalesAsync()
+        public Task CreateSaleAsync(SaleViewModel saleViewModel)
         {
-            var sales = await sale.Sales
-                .Select(s => new SaleViewModel
-                {
-                    Id = s.Id,
-                    CustomerId = s.CustomerId,
-                    SupplierId = s.SupplierId,
-                    WineId = s.WineId,
-                    Quantity = s.Quantity,
-                    TotalPrice = s.TotalPrice
-                })
-                .ToListAsync();
-
-            return sales;
+            throw new NotImplementedException();
         }
 
-        public async Task CreateSaleAsync(SaleViewModel saleViewModel)
+        public Task DeleteSaleAsync(int id)
         {
-            var sale = new Sale
-            {
-                CustomerId = saleViewModel.CustomerId,
-                SupplierId = saleViewModel.SupplierId,
-                WineId = saleViewModel.WineId,
-                Quantity = saleViewModel.Quantity,
-                TotalPrice = saleViewModel.TotalPrice
-            };
-
-            sale.Sales.Add(sale);
-            await sale.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<SaleViewModel> GetSaleByIdAsync(int id)
+        public Task<IEnumerable<SaleViewModel>> GetAllSalesAsync()
         {
-            var sale = await sale.Sales
-                .Where(s => s.Id == id)
-                .Select(s => new SaleViewModel
-                {
-                    Id = s.Id,
-                    CustomerId = s.CustomerId,
-                    SupplierId = s.SupplierId,
-                    WineId = s.WineId,
-                    Quantity = s.Quantity,
-                    TotalPrice = s.TotalPrice
-                })
-                .FirstOrDefaultAsync();
-
-            return sale;
+            throw new NotImplementedException();
         }
 
-        public async Task UpdateSaleAsync(SaleViewModel saleViewModel)
+        public Task<SaleViewModel> GetSaleByIdAsync(int id)
         {
-            var sale = await sale.Sales.FindAsync(saleViewModel.Id);
-            if (sale == null)
-            {
-                throw new ArgumentException("Sale not found");
-            }
-
-            sale.CustomerId = saleViewModel.CustomerId;
-            sale.SupplierId = saleViewModel.SupplierId;
-            sale.WineId = saleViewModel.WineId;
-            sale.Quantity = saleViewModel.Quantity;
-            sale.TotalPrice = saleViewModel.TotalPrice;
-
-            await sale.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task DeleteSaleAsync(int id)
+        public Task UpdateSaleAsync(SaleViewModel saleViewModel)
         {
-            var sale = await _sale.Sales.FindAsync(id);
-            if (sale == null)
-            {
-                throw new ArgumentException("Sale not found");
-            }
-
-            sale.Sales.Remove(sale);
-            await sale.SaveChangesAsync();
+            throw new NotImplementedException();
         }
     }
 }

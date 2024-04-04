@@ -41,5 +41,10 @@ namespace WineCraze.Core.Services
         {
             // Implement logic to delete a report from the data source by ID
         }
+
+        Task<IEnumerable<ReportViewModel>> IReportService.GetAllReportsAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
