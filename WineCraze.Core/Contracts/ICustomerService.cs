@@ -12,3 +12,5 @@ namespace WineCraze.Core.Contracts
         Task DeleteCustomerAsync(int id);
     }
 }
+
+// Summary - Provides methods for managing customers.

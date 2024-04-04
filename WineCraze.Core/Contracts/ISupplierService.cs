@@ -11,3 +11,6 @@ namespace WineCraze.Core.Contracts
         void DeleteSupplier(int id);
     }
 }
+
+
+// Summary - Provides methods for managing suppliers.

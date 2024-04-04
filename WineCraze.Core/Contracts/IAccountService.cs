@@ -9,3 +9,5 @@
         Task<bool> RemoveFromRoleAsync(string username, string roleName);
     }
 }
+
+// Summary - Provides methods for user authentication and authorization.

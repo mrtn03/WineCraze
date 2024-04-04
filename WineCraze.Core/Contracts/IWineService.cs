@@ -19,3 +19,6 @@ namespace WineCraze.Core.Contracts
         Task DeleteWineAsync(int id);
     }
 }
+
+
+// Summary - Provides methods for managing wines.

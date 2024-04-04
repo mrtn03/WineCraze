@@ -11,3 +11,5 @@ namespace WineCraze.Core.Contracts
         Task DeleteReportAsync(int id);
     }
 }
+
+// Summary - Provides methods for generating various reports.
