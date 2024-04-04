@@ -9,9 +9,9 @@ namespace WineCraze.Controllers
 {
     public class WineController : BaseController
     {
-        private readonly IInventoryService _wineService;
+        private readonly IWineService _wineService;
 
-        public WineController(IInventoryService wineService)
+        public WineController(IWineService wineService)
         {
             _wineService = wineService;
         }
