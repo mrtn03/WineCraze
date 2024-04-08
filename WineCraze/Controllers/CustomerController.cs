@@ -19,8 +19,11 @@ namespace WineCraze.Controllers
         {
             var customers = new List<CustomerViewModel>
             {
-                new CustomerViewModel { Id = 1, Name = "John Doe", Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" },
-                new CustomerViewModel { Id = 2, Name = "Jane Smith", Email = "jane@example.com", Address = "456 Elm St", PhoneNumber = "555-5678" }
+                new CustomerViewModel { Id = 1, Name = "John Doe", 
+                    Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" },
+
+                new CustomerViewModel { Id = 2, Name = "Jane Smith", 
+                    Email = "jane@example.com", Address = "456 Elm St", PhoneNumber = "555-5678" }
             };
 
             return View(customers);
@@ -28,7 +31,8 @@ namespace WineCraze.Controllers
 
         public IActionResult Details(int id)
         {
-            var customer = new CustomerViewModel { Id = id, Name = "John Doe", Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" };
+            var customer = new CustomerViewModel { Id = id, Name = "John Doe", 
+                Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" };
 
             return View(customer);
         }
@@ -59,7 +63,9 @@ namespace WineCraze.Controllers
 
         public IActionResult Delete(int id)
         {
-            var customer = new CustomerViewModel { Id = id, Name = "John Doe", Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" };
+            var customer = new CustomerViewModel { Id = id, Name = "John Doe", 
+                Email = "john@example.com", Address = "123 Main St", 
+                PhoneNumber = "555-1234" };
 
             return View(customer);
         }
