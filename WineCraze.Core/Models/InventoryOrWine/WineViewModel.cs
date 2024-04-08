@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static WineCraze.Core.Constants.ViewModelsConstants;
 
 namespace WineCraze.Core.Models.InventoryOrWine
 {
@@ -12,19 +13,19 @@ namespace WineCraze.Core.Models.InventoryOrWine
         public int Id { get; set; }
 
         [Required(ErrorMessage = "The Name field is required.")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [MaxLength(WineViewModelMaxName, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "The Type field is required.")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [StringLength(WineViewModelMaxType, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         public string Type { get; set; }
 
         [Required(ErrorMessage = "The Country field is required.")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [StringLength(WineViewModelMaxCountry, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         public string Country { get; set; }
 
         [Required(ErrorMessage = "The Region field is required.")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [StringLength(WineViewModelMaxRegion, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         public string Region { get; set; }
 
         [Required(ErrorMessage = "The CreatedOn field is required.")]
@@ -35,7 +36,7 @@ namespace WineCraze.Core.Models.InventoryOrWine
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "The Quantity field is required.")]
-        [Range(1, int.MaxValue, ErrorMessage = "The Quantity field must be greater than 0.")]
+        [MaxLength(WineViewModelMaxQuantity, ErrorMessage = "The Quantity field must be greater than 0.")]
         public int Quantity { get; set; }
 
         [Required(ErrorMessage = "The ImageUrl field is required.")]
