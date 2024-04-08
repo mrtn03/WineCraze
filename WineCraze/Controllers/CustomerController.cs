@@ -50,7 +50,8 @@ namespace WineCraze.Controllers
 
         public IActionResult Edit(int id)
         {
-            var customer = new CustomerViewModel { Id = id, Name = "John Doe", Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" };
+            var customer = new CustomerViewModel { Id = id, Name = "John Doe", 
+                Email = "john@example.com", Address = "123 Main St", PhoneNumber = "555-1234" };
 
             return View(customer);
         }

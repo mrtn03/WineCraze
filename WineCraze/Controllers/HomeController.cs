@@ -24,6 +24,20 @@ namespace WineCraze.Controllers
             return View();
         }
 
+        // GET: /Home/About
+        [AllowAnonymous]
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        // GET: /Home/Contact
+        [AllowAnonymous]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int statusCode)
