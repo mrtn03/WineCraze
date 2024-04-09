@@ -1,50 +1,84 @@
-﻿using WineCraze.Core.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using WineCraze.Core.Contracts;
 using WineCraze.Core.Models.Report;
 using WineCraze.Infrastructure.Data.Common;
+using WineCraze.Infrastructure.Data.Models;
 
 namespace WineCraze.Core.Services
 {
     public class ReportService : IReportService
     {
-        private readonly IRepository report;
+        private readonly IRepository _report;
 
         public ReportService(IRepository _repository)
         {
-            report = _repository;
+            _report = _repository;
         }
 
-        public async Task<List<ReportViewModel>> GetAllReportsAsync()
+        public async Task<IEnumerable<ReportViewModel>> GetAllReportsAsync()
         {
-            // Implement logic to retrieve all reports from data source
-            // Return a list of ReportViewModels
-            return new List<ReportViewModel>();
+            var reports = await _report
+                .All<Report>()
+                .Select(r => new ReportViewModel
+                {
+                    Id = r.Id,
+                    Title = r.Title,
+                    Description = r.Description,
+                    DateCreated = r.DateCreated,
+                })
+                .ToListAsync();
+
+            return reports;
         }
 
-        public async Task<ReportViewModel> GetReportByIdAsync(int id)
+        public async Task<ReportViewModel?> GetReportByIdAsync(int id)
         {
-            // Implement logic to retrieve report by ID from data source
-            // Return a single ReportViewModel
-            return new ReportViewModel();
+            var report = await _report.GetByIdAsync<Report>(id);
+
+            if (report == null)
+                return null;
+
+            return new ReportViewModel
+            {
+                Id = report.Id,
+                Title = report.Title,
+                Description = report.Description,
+                DateCreated = report.DateCreated,
+            };
         }
 
         public async Task CreateReportAsync(ReportViewModel reportViewModel)
         {
-            // Implement logic to create a new report in the data source
+            var report = new Report
+            {
+                Title = reportViewModel.Title,
+                Description = reportViewModel.Description,
+                DateCreated = string.Empty,
+                
+            };
+
+            await _report.AddAsync(report);
+            await _report.SaveChangesAsync();
         }
 
         public async Task UpdateReportAsync(ReportViewModel reportViewModel)
         {
-            // Implement logic to update an existing report in the data source
+            var report = await _report.GetByIdAsync<Report>(reportViewModel.Id);
+
+            if (report == null)
+                throw new ArgumentException("Report not found");
+
+            report.Title = reportViewModel.Title;
+            report.Description = reportViewModel.Description;
+            report.DateCreated = reportViewModel.DateCreated;
+
+            await _report.SaveChangesAsync();
         }
 
         public async Task DeleteReportAsync(int id)
         {
-            // Implement logic to delete a report from the data source by ID
-        }
-
-        Task<IEnumerable<ReportViewModel>> IReportService.GetAllReportsAsync()
-        {
-            throw new NotImplementedException();
+            await _report.DeleteAsync<Report>(id);
+            await _report.SaveChangesAsync();
         }
     }
 }
