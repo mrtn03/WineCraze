@@ -19,19 +19,37 @@ namespace WineCraze.Controllers
         // GET: Wine
         public async Task<IActionResult> Index()
         {
-            var wines = await _wineService.GetAllWinesAsync();
-            return View(wines);
+            try
+            {
+                var wines = await _wineService.GetAllWinesAsync();
+                return View(wines);
+            }
+            catch (Exception e)
+            {
+                // logger for exception
+                return NotFound();
+            }
         }
 
         // GET: Wine/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var wine = await _wineService.GetWineByIdAsync(id);
-            if (wine == null)
+
+            try
             {
+                var wine = await _wineService.GetWineByIdAsync(id);
+
+                if (wine is null)
+                {
+                    return NotFound();
+                }
+                return View(wine);
+            }
+            catch (Exception e)
+            {
+                // logger for exception
                 return NotFound();
             }
-            return View(wine);
         }
 
         // GET: Wine/Create
@@ -45,23 +63,42 @@ namespace WineCraze.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(WineViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid is false)
+            {
+                return View(viewModel);
+            }
+
+            try
             {
                 await _wineService.AddWineAsync(viewModel);
                 return RedirectToAction(nameof(Index));
             }
-            return View(viewModel);
+            catch (Exception e)
+            {
+                // logger for exception
+                return View(viewModel);
+            }
         }
 
         // GET: Wine/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var wine = await _wineService.GetWineByIdAsync(id);
-            if (wine == null)
+            try
             {
+                var wine = await _wineService.GetWineByIdAsync(id);
+
+                if (wine is null)
+                {
+                    return NotFound();
+                }
+
+                return View(wine);
+            }
+            catch (Exception e)
+            {
+                // logger for exception
                 return NotFound();
             }
-            return View(wine);
         }
 
         // POST: Wine/Edit/5
@@ -74,30 +111,41 @@ namespace WineCraze.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid == false)
             {
-                try
-                {
-                    await _wineService.UpdateWineAsync(viewModel);
-                }
-                catch (ArgumentException)
-                {
-                    return NotFound();
-                }
-                return RedirectToAction(nameof(Index));
+                return View(viewModel);
             }
-            return View(viewModel);
+
+            try
+            {
+                await _wineService.UpdateWineAsync(viewModel);
+            }
+            catch (ArgumentException)
+            {
+                // logger for exception
+                return NotFound();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Wine/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            var wine = await _wineService.GetWineByIdAsync(id);
-            if (wine == null)
+            try
             {
-                return NotFound();
+                var wine = await _wineService.GetWineByIdAsync(id);
+
+                if (wine is null)
+                {
+                    return NotFound();
+                }
+
+                return View(wine);
             }
-            return View(wine);
+            catch (Exception e)
+            {
+
+            }
         }
 
         // POST: Wine/Delete/5
@@ -105,8 +153,16 @@ namespace WineCraze.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _wineService.DeleteWineAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _wineService.DeleteWineAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                // logger for exception
+                return NotFound();
+            }
         }
     }
 }

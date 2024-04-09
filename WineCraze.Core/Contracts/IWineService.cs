@@ -13,7 +13,7 @@ namespace WineCraze.Core.Contracts
     public interface IWineService
     {
         Task<IEnumerable<WineViewModel>> GetAllWinesAsync();
-        Task<WineViewModel> GetWineByIdAsync(int id);
+        Task<WineViewModel?> GetWineByIdAsync(int id);
         Task AddWineAsync(WineViewModel viewModel);
         Task UpdateWineAsync(WineViewModel viewModel);
         Task DeleteWineAsync(int id);

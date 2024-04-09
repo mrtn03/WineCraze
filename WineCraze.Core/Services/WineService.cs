@@ -7,106 +7,118 @@ using WineCraze.Infrastructure.Data.Models;
 
 namespace WineCraze.Core.Services
 {
-    public class WineService : IWineService
-    {
-        //        private readonly IRepository wines;
-
-        //        public WineService(IRepository _wineRepository)
-        //        {
-        //            wines = _wineRepository;
-        //        }
-
-        //        //public async Task<IEnumerable<WineViewModel>> GetAllWinesAsync()
-        //        //{
-        //        //    var ResWines = await wines.All<Wine>().ToListAsync();
-        //        //    var wineViewModels = wines.Select(wine => new WineViewModel
-        //        //    {
-        //        //        Id = wine.Id,
-        //        //        Name = wine.Name,
-        //        //        // Add other properties as needed
-        //        //    });
-        //        //    return wineViewModels;
-        //        //}
-
-        //        public async Task<WineViewModel> GetWineByIdAsync(int id)
-        //        {
-        //            var resWine = await wines.GetByIdAsync<Wine>(id);
-        //            if (resWine != null)
-        //            {
-        //                var wineViewModel = new WineViewModel
-        //                {
-        //                    Id = resWine.Id,
-        //                    Name = resWine.Name,
-        //                };
-        //                return wineViewModel;
-        //            }
-        //            return null; 
-        //        }
-
-        //        public async Task AddWineAsync(WineViewModel viewModel)
-        //        {
-        //            var wine = new Wine
-        //            {
-        //                Name = viewModel.Name,
-        //            };
-        //            await wines.AddAsync(wine);
-        //            await wines.SaveChangesAsync();
-        //        }
-
-        //        public async Task UpdateWineAsync(WineViewModel viewModel)
-        //        {
-        //            //var wine = await wines.GetByIdAsync<Wine>(viewModel.Id);
-        //            //if (wine != null)
-        //            //{
-        //            //    wine.Name = viewModel.Name;
-        //            //    // Update other properties
-        //            //    wines.Update(wine);
-        //            //    await wines.SaveChangesAsync();
-        //            //}
-        //            else
-        //            {
-        //                throw new ArgumentException("Wine not found.");
-        //            }
-        //        }
-
-        //        public async Task DeleteWineAsync(int id)
-        //        {
-        //            //var wine = await wines.GetByIdAsync<Wine>(id);
-        //            //if (wine != null)
-        //            //{
-        //            //    wines.Delete(wine);
-        //            //    await wines.SaveChangesAsync();
-        //            //}
-        //            else
-        //            {
-        //                throw new ArgumentException("Wine not found.");
-        //            }
-        //        }
-        //    }
-        //}
-        public Task AddWineAsync(WineViewModel viewModel)
+        public class WineService : IWineService
         {
-            throw new NotImplementedException();
-        }
+            private readonly IRepository repository;
 
-        public Task DeleteWineAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+            public WineService(IRepository repositoryRepository)
+            {
+                repository = repositoryRepository;
+            }
 
-        public Task<IEnumerable<WineViewModel>> GetAllWinesAsync()
-        {
-            throw new NotImplementedException();
-        }
+            public async Task<IEnumerable<WineViewModel>> GetAllWinesAsync()
+            {
+                var wineViewModels = await repository
+                    .All<Wine>()
+                    .Select(w => new WineViewModel()
+                    {
+                        Id = w.Id,
+                        Name = w.Name,
+                        Country = w.Country,
+                        Type = w.Type,
+                        Price = w.Price,
+                        CreatedOn = w.CreatedOn,
+                        Region = w.Region,
+                        ImageUrl = w.ImageUrl,
+                        Quantity = w.Quantity,
+                        SupplierId = w.SupplierId,
 
-        public Task<WineViewModel> GetWineByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+                    })
+                    .ToListAsync();
 
-        public Task UpdateWineAsync(WineViewModel viewModel)
-        {
-            throw new NotImplementedException();
+                return wineViewModels;
+            }
+
+            public async Task<WineViewModel?> GetWineByIdAsync(int id)
+            {
+                var wine = await repository.GetByIdAsync<Wine>(id);
+
+                if (wine is null)
+                {
+                    return null;
+                }
+
+                var wineViewModel = new WineViewModel
+                {
+                    Id = wine.Id,
+                    Name = wine.Name,
+                    Country = wine.Country,
+                    Type = wine.Type,
+                    Price = wine.Price,
+                    CreatedOn = wine.CreatedOn,
+                    Region = wine.Region,
+                    ImageUrl = wine.ImageUrl,
+                    Quantity = wine.Quantity,
+                    SupplierId = wine.SupplierId,
+                };
+
+                return wineViewModel;
+            }
+
+            public async Task AddWineAsync(WineViewModel viewModel)
+            {
+                var wine = new Wine()
+                {
+                    Name = viewModel.Name,
+                    Country = viewModel.Country,
+                    Type = viewModel.Type,
+                    Price = viewModel.Price,
+                    CreatedOn = DateTime.Now.ToString(),
+                    Region = viewModel.Region,
+                    ImageUrl = viewModel.ImageUrl,
+                    Quantity = viewModel.Quantity,
+                    SupplierId = viewModel.SupplierId,
+                };
+
+                await repository.AddAsync(wine);
+                await repository.SaveChangesAsync();
+            }
+
+            public async Task UpdateWineAsync(WineViewModel viewModel)
+            {
+                var wine = await repository.GetByIdAsync<Wine>(viewModel.Id);
+
+                if (wine is null)
+                {
+                    throw new ArgumentException("Wine not found.");
+                    // should be a custom exception and controller should handle it with try/catch
+                }
+
+                wine.Name = viewModel.Name;
+                wine.Country = viewModel.Country;
+                wine.Type = viewModel.Type;
+                wine.Price = viewModel.Price;
+                wine.CreatedOn = viewModel.CreatedOn;
+                wine.Region = viewModel.Region;
+                wine.ImageUrl = viewModel.ImageUrl;
+                wine.Quantity = viewModel.Quantity;
+                wine.SupplierId = viewModel.SupplierId;
+
+                await repository.SaveChangesAsync();
+            }
+
+            public async Task DeleteWineAsync(int id)
+            {
+                var wine = await repository.GetByIdAsync<Wine>(id);
+
+                if (wine is null)
+                {
+                    throw new ArgumentException("Wine not found.");
+                    // should be a custom exception and controller should handle it with try/catch
+                }
+
+                await repository.DeleteAsync<Wine>(wine.Id);
+                await repository.SaveChangesAsync();
+            }
         }
-    }
-}
+     }
