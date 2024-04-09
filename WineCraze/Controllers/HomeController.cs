@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WineCraze.Core.Contracts;
@@ -10,48 +11,53 @@ namespace WineCraze.Controllers
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IWineService _wineService;
+        private readonly IWineService wineService;
 
-        public HomeController(ILogger<HomeController> logger, IWineService wineService)
+        public HomeController(
+            ILogger<HomeController> logger,
+            IWineService _wineService)
         {
             _logger = logger;
-            _wineService = wineService;
+            wineService = _wineService;
         }
 
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var model = await wineService.GetAllWinesAsync();
 
-        // GET: /Home/About
-        [AllowAnonymous]
-        public IActionResult About()
-        {
-            return View();
-        }
-
-        // GET: /Home/Contact
-        [AllowAnonymous]
-        public IActionResult Contact()
-        {
-            return View();
+            return View(model);
         }
 
         [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int statusCode)
         {
-            // Handle specific error statuses
-            switch (statusCode)
+
+            if (statusCode == 400)
             {
-                case 400:
-                    return View("Error400");
-                case 401:
-                    return View("Error401");
-                default:
-                    return View();
+                return View("Error400");
             }
+
+            if (statusCode == 401)
+            {
+                return View("Error401");
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
     }
 }
