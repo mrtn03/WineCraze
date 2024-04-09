@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WineCraze.Core.Contracts;
-using WineCraze.Core.Models.InventoryOrWine;
 using WineCraze.Data;
 using WineCraze.Infrastructure.Data.Models;
+using WineCraze.Core.Models.Wine;
 
 namespace WineCraze.Controllers
 {
@@ -17,6 +17,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Wine
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             try
@@ -32,6 +33,7 @@ namespace WineCraze.Controllers
         }
 
         // GET: Wine/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
 
@@ -53,9 +55,12 @@ namespace WineCraze.Controllers
         }
 
         // GET: Wine/Create
+        [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var wine = new WineViewModel();
+
+            return View(wine);
         }
 
         // POST: Wine/Create
