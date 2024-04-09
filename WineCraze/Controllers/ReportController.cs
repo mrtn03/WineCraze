@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WineCraze.Core.Contracts;
+using WineCraze.Core.Models.Customer;
+using WineCraze.Core.Models.Report;
 using WineCraze.Data;
 
 namespace WineCraze.Controllers
@@ -8,50 +11,111 @@ namespace WineCraze.Controllers
     [Authorize]
     public class ReportController : BaseController
     {
-        private readonly WineCrazeDbContext _context;
+        private readonly IReportService _reportService;
 
-        public ReportController(WineCrazeDbContext context)
+        public ReportController(IReportService reportService)
         {
-            _context = context;
+            _reportService = reportService;
         }
 
         // GET: Report
-        [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            var reports = await _reportService.GetAllReportsAsync();
+            return View(reports);
+        }
+
+        // GET: Report/Details/5
+        public async Task<IActionResult> Details(int id)
+        {
+            var report = await _reportService.GetReportByIdAsync(id);
+            if (report == null)
+            {
+                return NotFound();
+            }
+            return View(report);
+        }
+
+        // GET: Report/Create
+        public IActionResult Create()
         {
             return View();
         }
 
-        // GET: Report/Sales
-        [HttpGet]
-        public async Task<IActionResult> Sales()
+        // POST: Report/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ReportViewModel viewModel)
         {
-            var sales = await _context.Sales
-                .Include(s => s.Customer)
-                .Include(s => s.Supplier)
-                .Include(s => s.Wine)
-                .ToListAsync();
-
-            return View(sales);
+            if (ModelState.IsValid)
+            {
+                await _reportService.CreateReportAsync(viewModel);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(viewModel);
         }
 
-        // GET: Report/Inventory
-        [HttpGet]
-        public async Task<IActionResult> Inventory()
+        // GET: Report/Edit/5
+        public async Task<IActionResult> Edit(int id)
         {
-            var wines = await _context.Wines.ToListAsync();
-            return View(wines);
+            var report = await _reportService.GetReportByIdAsync(id);
+            if (report == null)
+            {
+                return NotFound();
+            }
+            return View(report);
         }
 
-        // GET: Report/Profit
-        [HttpGet]
-        public async Task<IActionResult> Profit()
+        // POST: Report/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, ReportViewModel viewModel)
         {
-            var sales = await _context.Sales
-                .Include(s => s.Wine)
-                .ToListAsync();
+            if (id != viewModel.Id)
+            {
+                return NotFound();
+            }
 
-            return View(sales);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _reportService.UpdateReportAsync(viewModel);
+                }
+                catch (Exception)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(viewModel);
+        }
+
+        // GET: Report/Delete/5
+        public async Task<IActionResult> Delete(int id)
+        {
+            var report = await _reportService.GetReportByIdAsync(id);
+            if (report == null)
+            {
+                return NotFound();
+            }
+            return View(report);
+        }
+
+        // POST: Report/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                await _reportService.DeleteReportAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
     }
 }
