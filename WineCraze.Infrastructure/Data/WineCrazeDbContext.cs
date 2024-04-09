@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Reflection.Emit;
 using WineCraze.Infrastructure.Data.Models;
 using WineCraze.Infrastructure.Data.SeedDb;
@@ -8,6 +9,11 @@ namespace WineCraze.Data
 {
     public class WineCrazeDbContext : IdentityDbContext
     {
+        public WineCrazeDbContext()
+        {
+
+        }
+
         public WineCrazeDbContext(DbContextOptions<WineCrazeDbContext> options)
            : base(options)
         {
@@ -19,19 +25,35 @@ namespace WineCraze.Data
         public DbSet<Supplier> Suppliers { get; set; } = null!;
         public DbSet<Report> Reports { get; set; } = null!;
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionString);
+            }
+
+            base.OnConfiguring(optionsBuilder);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Sale>()
                .HasOne(s => s.Customer)
                 .WithMany(c => c.Sales)
                 .HasForeignKey(s => s.CustomerId)
-                .OnDelete(DeleteBehavior.NoAction); 
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Sale>()
                 .HasOne(s => s.Supplier)
                 .WithMany(su => su.Sales)
                 .HasForeignKey(s => s.SupplierId)
-                .OnDelete(DeleteBehavior.NoAction); 
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Sale>()
              .HasOne(s => s.Wine)
