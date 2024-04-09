@@ -16,34 +16,34 @@ namespace WineCraze.Controllers
         }
 
 
-        // GET: /Customer
+        // GET: Customer
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var customers = await _customerService.GetAllCustomersAsync();
             return View(customers);
         }
 
-        // GET: /Customer/Details/5
+        // GET: Customer/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            try
-            {
-                var customer = await _customerService.GetCustomerByIdAsync(id);
-                return View(customer);
-            }
-            catch (InvalidOperationException)
+            var customer = await _customerService.GetCustomerByIdAsync(id);
+            if (customer == null)
             {
                 return NotFound();
             }
+            return View(customer);
         }
 
-        // GET: /Customer/Create
+        // GET: Customer/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: /Customer/Create
+        // POST: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CustomerViewModel viewModel)
@@ -56,21 +56,19 @@ namespace WineCraze.Controllers
             return View(viewModel);
         }
 
-        // GET: /Customer/Edit/5
+        // GET: Customer/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            try
-            {
-                var customer = await _customerService.GetCustomerByIdAsync(id);
-                return View(customer);
-            }
-            catch (InvalidOperationException)
+            var customer = await _customerService.GetCustomerByIdAsync(id);
+            if (customer == null)
             {
                 return NotFound();
             }
+            return View(customer);
         }
 
-        // POST: /Customer/Edit/5
+        // POST: Customer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, CustomerViewModel viewModel)
@@ -86,7 +84,7 @@ namespace WineCraze.Controllers
                 {
                     await _customerService.UpdateCustomerAsync(viewModel);
                 }
-                catch (InvalidOperationException)
+                catch (ArgumentException)
                 {
                     return NotFound();
                 }
@@ -95,21 +93,18 @@ namespace WineCraze.Controllers
             return View(viewModel);
         }
 
-        // GET: /Customer/Delete/5
+        // GET: Customer/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                var customer = await _customerService.GetCustomerByIdAsync(id);
-                return View(customer);
-            }
-            catch (InvalidOperationException)
+            var customer = await _customerService.GetCustomerByIdAsync(id);
+            if (customer == null)
             {
                 return NotFound();
             }
+            return View(customer);
         }
 
-        // POST: /Customer/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -119,7 +114,7 @@ namespace WineCraze.Controllers
                 await _customerService.DeleteCustomerAsync(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch (InvalidOperationException)
+            catch (ArgumentException)
             {
                 return NotFound();
             }

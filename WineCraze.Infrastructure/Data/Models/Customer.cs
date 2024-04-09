@@ -29,6 +29,16 @@ namespace WineCraze.Infrastructure.Data.Models
         public string PhoneNumber { get; set; } = string.Empty;
 
         public ICollection<Sale> Sales { get; set; } = new HashSet<Sale>();
+
+        public Task AddAsync(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SaveChangesAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
