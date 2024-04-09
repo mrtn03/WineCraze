@@ -13,7 +13,6 @@ namespace WineCraze.Controllers
             _wineService = wineService;
         }
 
-        // GET: Wine
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -29,7 +28,6 @@ namespace WineCraze.Controllers
             }
         }
 
-        // GET: Wine/Details/5
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -51,7 +49,6 @@ namespace WineCraze.Controllers
             }
         }
 
-        // GET: Wine/Create
         [HttpGet]
         public IActionResult Create()
         {
@@ -60,7 +57,6 @@ namespace WineCraze.Controllers
             return View(wine);
         }
 
-        // POST: Wine/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(WineViewModel viewModel)
@@ -82,7 +78,7 @@ namespace WineCraze.Controllers
             }
         }
 
-        // GET: Wine/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             try
@@ -130,7 +126,7 @@ namespace WineCraze.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Wine/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -150,7 +146,6 @@ namespace WineCraze.Controllers
             }
         }
 
-        // POST: Wine/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -15,21 +15,32 @@ namespace WineCraze.Controllers
             _saleService = saleService;
         }
 
-        // GET: Sales
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var sales = await _saleService.GetAllSalesAsync();
             return View(sales);
         }
 
-        // GET: Sales/Create
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var sale = await _saleService.GetSaleByIdAsync(id);
+
+            if (sale == null)
+            {
+                return NotFound();
+            }
+
+            return View(sale);
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
-            // Populate dropdowns with related entities if needed
             return View();
         }
 
-        // POST: Sales/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SaleViewModel saleViewModel)
@@ -42,7 +53,71 @@ namespace WineCraze.Controllers
             return View(saleViewModel);
         }
 
-        // Implement other action methods
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var sale = await _saleService.GetSaleByIdAsync(id);
+
+            if (sale == null)
+            {
+                return NotFound();
+            }
+
+            return View(sale);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, SaleViewModel saleViewModel)
+        {
+            if (id != saleViewModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _saleService.UpdateSaleAsync(saleViewModel);
+                }
+                catch (ArgumentException)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(saleViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var sale = await _saleService.GetSaleByIdAsync(id);
+
+            if (sale == null)
+            {
+                return NotFound();
+            }
+
+            return View(sale);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                await _saleService.DeleteSaleAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ArgumentException)
+            {
+                return NotFound();
+            }
+        }
     }
 }
 

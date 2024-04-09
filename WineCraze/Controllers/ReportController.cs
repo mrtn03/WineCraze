@@ -18,14 +18,15 @@ namespace WineCraze.Controllers
             _reportService = reportService;
         }
 
-        // GET: Report
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var reports = await _reportService.GetAllReportsAsync();
             return View(reports);
         }
 
-        // GET: Report/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             var report = await _reportService.GetReportByIdAsync(id);
@@ -36,13 +37,12 @@ namespace WineCraze.Controllers
             return View(report);
         }
 
-        // GET: Report/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Report/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ReportViewModel viewModel)
@@ -55,7 +55,7 @@ namespace WineCraze.Controllers
             return View(viewModel);
         }
 
-        // GET: Report/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var report = await _reportService.GetReportByIdAsync(id);
@@ -66,7 +66,6 @@ namespace WineCraze.Controllers
             return View(report);
         }
 
-        // POST: Report/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ReportViewModel viewModel)
@@ -91,7 +90,7 @@ namespace WineCraze.Controllers
             return View(viewModel);
         }
 
-        // GET: Report/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             var report = await _reportService.GetReportByIdAsync(id);
@@ -102,7 +101,6 @@ namespace WineCraze.Controllers
             return View(report);
         }
 
-        // POST: Report/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

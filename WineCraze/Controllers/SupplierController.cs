@@ -15,14 +15,14 @@ namespace WineCraze.Controllers
             _supplierService = supplierService;
         }
 
-        // GET: Supplier
+        [HttpGet]
         public IActionResult Index()
         {
             var suppliers = _supplierService.GetAllSuppliers();
             return View(suppliers);
         }
 
-        // GET: Supplier/Details/5
+        [HttpGet]
         public IActionResult Details(int id)
         {
             try
@@ -30,19 +30,18 @@ namespace WineCraze.Controllers
                 var supplier = _supplierService.GetSupplierById(id);
                 return View(supplier);
             }
-            catch (InvalidOperationException)
+            catch (ArgumentException)
             {
                 return NotFound();
             }
         }
 
-        // GET: Supplier/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Supplier/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(SupplierViewModel viewModel)
@@ -55,7 +54,7 @@ namespace WineCraze.Controllers
             return View(viewModel);
         }
 
-        // GET: Supplier/Edit/5
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             try
@@ -63,38 +62,33 @@ namespace WineCraze.Controllers
                 var supplier = _supplierService.GetSupplierById(id);
                 return View(supplier);
             }
-            catch (InvalidOperationException)
+            catch (ArgumentException)
             {
                 return NotFound();
             }
         }
 
-        // POST: Supplier/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, SupplierViewModel viewModel)
+        public IActionResult Edit(SupplierViewModel viewModel)
         {
-            if (id != viewModel.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
                     _supplierService.UpdateSupplier(viewModel);
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (InvalidOperationException)
+                catch (ArgumentException)
                 {
                     return NotFound();
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(viewModel);
         }
 
-        // GET: Supplier/Delete/5
+
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             try
@@ -102,13 +96,12 @@ namespace WineCraze.Controllers
                 var supplier = _supplierService.GetSupplierById(id);
                 return View(supplier);
             }
-            catch (InvalidOperationException)
+            catch (ArgumentException)
             {
                 return NotFound();
             }
         }
 
-        // POST: Supplier/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
@@ -118,7 +111,7 @@ namespace WineCraze.Controllers
                 _supplierService.DeleteSupplier(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch (InvalidOperationException)
+            catch (ArgumentException)
             {
                 return NotFound();
             }
