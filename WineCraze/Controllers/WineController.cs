@@ -144,7 +144,7 @@ namespace WineCraze.Controllers
             }
             catch (Exception e)
             {
-
+                return RedirectToAction("Error", "Home");
             }
         }
 
