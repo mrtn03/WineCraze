@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WineCraze.Core.Contracts;
-using WineCraze.Data;
-using WineCraze.Infrastructure.Data.Models;
-using WineCraze.Core.Models.Wine;
+using WineCraze.Core.Models.Inventory;
 
 namespace WineCraze.Controllers
 {

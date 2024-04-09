@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Nest;
 using WineCraze.Core.Contracts;
-using WineCraze.Core.Models.InventoryOrWine;
+using WineCraze.Core.Models.Inventory;
 using WineCraze.Infrastructure.Data.Common;
 using WineCraze.Infrastructure.Data.Models;
 
 namespace WineCraze.Core.Services
 {
-        public class WineService : IWineService
+    public class WineService : IWineService
         {
             private readonly IRepository repository;
 

@@ -1,12 +1,4 @@
-﻿using Nest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WineCraze.Core.Models.InventoryOrWine;
-using WineCraze.Infrastructure.Data.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+﻿using WineCraze.Core.Models.Inventory;
 
 namespace WineCraze.Core.Contracts
 {

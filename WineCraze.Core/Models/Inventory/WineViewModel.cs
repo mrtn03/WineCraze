@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static WineCraze.Core.Constants.ViewModelsConstants;
 
-namespace WineCraze.Core.Models.InventoryOrWine
+namespace WineCraze.Core.Models.Inventory
 {
     public class WineViewModel
     {
