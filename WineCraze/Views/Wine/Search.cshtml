@@ -32,3 +32,9 @@ else
 {
     <p>No wines found.</p>
 }
+<form method="post" action="/Wine/Search">
+    <p>
+        <input type="text" name="searchTerm" class="search" value="@Model" />
+        <input type="submit" value="Search" class="searchSubmit" />
+    </p>
+</form>

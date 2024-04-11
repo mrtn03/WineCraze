@@ -163,11 +163,10 @@ namespace WineCraze.Controllers
         }
 
         [HttpPost]
-        public IActionResult Search(string search)
+        public async Task<IActionResult> Search(string searchTerm)
         {
-            var searchResults = _wineService.SearchWinesAsync(search);
-
-            return View(searchResults);
+            var wines = await _wineService.SearchWinesAsync(searchTerm);
+            return View(wines);
         }
     }
 }
