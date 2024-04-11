@@ -1,4 +1,4 @@
-﻿@model WineCraze.Infrastructure.Data.Models.Sale
+﻿@model SaleViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -22,30 +22,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.TotalPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SaleDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SaleDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Wine)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Wine.Country)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Customer.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Supplier)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Supplier.Address)
         </dd>
     </dl>
     

@@ -1,4 +1,4 @@
-﻿@model WineCraze.Infrastructure.Data.Models.Sale
+﻿@model SaleViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,7 +10,6 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -22,11 +21,6 @@
                 <label asp-for="TotalPrice" class="control-label"></label>
                 <input asp-for="TotalPrice" class="form-control" />
                 <span asp-validation-for="TotalPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SaleDate" class="control-label"></label>
-                <input asp-for="SaleDate" class="form-control" />
-                <span asp-validation-for="SaleDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="WineId" class="control-label"></label>

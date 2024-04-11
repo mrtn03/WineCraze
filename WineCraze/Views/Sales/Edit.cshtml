@@ -1,4 +1,4 @@
-﻿@model WineCraze.Infrastructure.Data.Models.Sale
+﻿@model SaleViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -22,11 +22,6 @@
                 <label asp-for="TotalPrice" class="control-label"></label>
                 <input asp-for="TotalPrice" class="form-control" />
                 <span asp-validation-for="TotalPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SaleDate" class="control-label"></label>
-                <input asp-for="SaleDate" class="form-control" />
-                <span asp-validation-for="SaleDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="WineId" class="control-label"></label>

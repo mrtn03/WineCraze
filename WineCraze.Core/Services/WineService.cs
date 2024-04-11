@@ -119,5 +119,5 @@ namespace WineCraze.Core.Services
                 await repository.DeleteAsync<Wine>(wine.Id);
                 await repository.SaveChangesAsync();
             }
-        }
-     }
+    }
+}
