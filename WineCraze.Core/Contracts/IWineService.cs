@@ -9,6 +9,7 @@ namespace WineCraze.Core.Contracts
         Task AddWineAsync(WineViewModel viewModel);
         Task UpdateWineAsync(WineViewModel viewModel);
         Task DeleteWineAsync(int id);
+        Task<IEnumerable<WineViewModel>> SearchWinesAsync(string searchTerm);
     }
 }
 

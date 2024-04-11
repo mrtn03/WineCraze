@@ -161,5 +161,13 @@ namespace WineCraze.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPost]
+        public IActionResult Search(string search)
+        {
+            var searchResults = _wineService.SearchWinesAsync(search);
+
+            return View(searchResults);
+        }
     }
 }

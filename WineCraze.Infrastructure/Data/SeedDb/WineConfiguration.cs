@@ -9,9 +9,9 @@ namespace WineCraze.Infrastructure.Data.SeedDb
         public void Configure(EntityTypeBuilder<Wine> builder)
         {
             builder.HasData(
-                new Wine { Id = 1, Name = "Red Wine", Type = "Red", CreatedOn = "2019", Price = 20.00m, Country = "Italy", SupplierId = 2 },
-                new Wine { Id = 2, Name = "White Wine", Type = "White", CreatedOn = "2020", Price = 18.50m, Country = "Italy", SupplierId = 1 },
-                new Wine { Id = 3, Name = "Rosé Wine", Type = "Rosé", CreatedOn = "2018", Price = 15.75m, Country = "Italy", SupplierId = 1 }
+                new Wine { Id = 1, Name = "Red Wine", Type = "Red", CreatedOn = "2019", Price = 20.00m, Country = "Italy"  },
+                new Wine { Id = 2, Name = "White Wine", Type = "White", CreatedOn = "2020", Price = 18.50m, Country = "Italy"  },
+                new Wine { Id = 3, Name = "Rosé Wine", Type = "Rosé", CreatedOn = "2018", Price = 15.75m, Country = "Italy"  }
 
             );
         }
