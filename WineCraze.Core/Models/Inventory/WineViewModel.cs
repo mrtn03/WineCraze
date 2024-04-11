@@ -13,7 +13,7 @@ namespace WineCraze.Core.Models.Inventory
         public int Id { get; set; }
 
         [Required(ErrorMessage = "The Name field is required.")]
-        [MaxLength(WineViewModelMaxName, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
+        [StringLength(WineViewModelMaxName, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "The Type field is required.")]
@@ -36,7 +36,7 @@ namespace WineCraze.Core.Models.Inventory
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "The Quantity field is required.")]
-        [MaxLength(WineViewModelMaxQuantity, ErrorMessage = "The Quantity field must be greater than 0.")]
+        [StringLength(WineViewModelMaxQuantity, ErrorMessage = "The Quantity field must be greater than 0.")]
         public int Quantity { get; set; }
 
         [Required(ErrorMessage = "The ImageUrl field is required.")]
