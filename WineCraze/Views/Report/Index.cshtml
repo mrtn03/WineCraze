@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ReportViewModel>
+
+<h2>Report List</h2>
+
+@if (!Model.Any())
+{
+    <p>No reports found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var report in Model)
+            {
+                <tr>
+                    <td>@report.Title</td>
+                    <td>@report.DateCreated</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Report", new { id = report.Id })">Details</a> |
+                        <a href="@Url.Action("Edit", "Report", new { id = report.Id })">Edit</a> |
+                        <a href="@Url.Action("Delete", "Report", new { id = report.Id })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a href="@Url.Action("Create", "Report")" class="btn btn-primary">Create Report</a>

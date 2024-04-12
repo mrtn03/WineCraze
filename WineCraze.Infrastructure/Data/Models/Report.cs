@@ -20,6 +20,7 @@ namespace WineCraze.Infrastructure.Data.Models
 
         [Required]
         [Comment("Date of creation")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd H:mm}")]
         public string DateCreated { get; set; } = string.Empty;
 
         public ICollection<Sale> Sales { get; set; } = new HashSet<Sale>();

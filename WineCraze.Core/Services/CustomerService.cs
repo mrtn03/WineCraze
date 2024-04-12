@@ -53,7 +53,7 @@ namespace WineCraze.Core.Services
             return customerViewModel;
         }
 
-        public async Task AddAsync(CustomerViewModel viewModel)
+        public async Task AddCustomerAsync(CustomerViewModel viewModel)
         {
             var customer = new Customer
             {

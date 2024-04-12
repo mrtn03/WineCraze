@@ -7,7 +7,7 @@ namespace WineCraze.Core.Contracts
     {
         Task<IEnumerable<CustomerViewModel>> GetAllCustomersAsync();
         Task<CustomerViewModel> GetCustomerByIdAsync(int id);
-        Task AddAsync(CustomerViewModel viewModel);
+        Task AddCustomerAsync(CustomerViewModel viewModel);
         Task UpdateCustomerAsync(CustomerViewModel viewModel);
         Task DeleteCustomerAsync(int id);
     }
