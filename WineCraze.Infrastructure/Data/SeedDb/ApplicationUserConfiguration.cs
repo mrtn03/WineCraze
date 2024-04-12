@@ -10,7 +10,7 @@ namespace WineCraze.Infrastructure.Data.SeedDb
         {
             var data = new SeedData();
 
-            //builder.HasData(new IdentityUser[] { data.AgentUser, data.GuestUser });
+            builder.HasData(new IdentityUser[] { data.AdminUser, data.GuestUser });
         }
     }
 }

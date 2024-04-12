@@ -37,5 +37,8 @@ namespace WineCraze.Infrastructure.Constants
 
         public const string PriceMax = "2000.00";
 
+
+        public const int UserFirstNameMaxLength = 100;
+        public const int UserLastNameMaxLength = 100;
     }
 }
