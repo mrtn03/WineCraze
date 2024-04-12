@@ -47,7 +47,7 @@ namespace WineCraze.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _customerService.AddCustomerAsync(viewModel);
+                await _customerService.AddAsync(viewModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(viewModel);

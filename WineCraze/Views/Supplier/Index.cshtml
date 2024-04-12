@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SupplierViewModel>
+
+<h2>Supplier List</h2>
+
+@if (!Model.Any())
+{
+    <p>No suppliers found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var supplier in Model)
+            {
+                <tr>
+                    <td>@supplier.Name</td>
+                    <td>@supplier.Email</td>
+                    <td>@supplier.Phone</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Supplier", new { id = supplier.Id })">Edit</a> |
+                        <a href="@Url.Action("Details", "Supplier", new { id = supplier.Id })">Details</a> |
+                        <a href="@Url.Action("Delete", "Supplier", new { id = supplier.Id })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a href="@Url.Action("Create", "Supplier")" class="btn btn-primary">Add Supplier</a>
