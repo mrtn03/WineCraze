@@ -48,15 +48,15 @@ app.UseEndpoints(endpoints =>
         pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
     endpoints.MapControllerRoute(
-            name: "SearchWines",
-            pattern: "Wine/Search",
-            defaults: new { controller = "Wine", action = "Search" });
-
-    endpoints.MapControllerRoute(
         name: "Wine Details",
         pattern: "/Wine/Details/{id}/{information}",
-        defaults: new { Controller = "Wine", Action = "Details" }
-    ); 
+        defaults: new { Controller = "Wine", Action = "Details" });
+
+        endpoints.MapControllerRoute(
+            name: "SearchWines",
+            pattern: "Wine/Search",
+            defaults: new { controller = "Wine", action = "Search" }
+    );
 
     endpoints.MapDefaultControllerRoute();
    endpoints.MapRazorPages();

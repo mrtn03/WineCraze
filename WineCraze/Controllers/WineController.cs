@@ -156,9 +156,14 @@ namespace WineCraze.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Search(string searchTerm)
         {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             var wines = await _wineService.SearchWinesAsync(searchTerm);
             return View(wines);
         }
