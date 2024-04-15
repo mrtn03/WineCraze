@@ -17,8 +17,7 @@ namespace WineCraze.Infrastructure.Data.SeedDb
                     TotalPrice = 44.00M,
                     SaleDate = DateTime.Now,
                     WineId = 1,
-                    CustomerId = 1, 
-                    SupplierId = 1,  
+                    CustomerId = 1,  
                 },
                 new Sale
                 {
@@ -28,7 +27,6 @@ namespace WineCraze.Infrastructure.Data.SeedDb
                     SaleDate = DateTime.Now,
                     WineId = 2,
                     CustomerId = 2, 
-                    SupplierId = 2, 
                 }
             );
 
