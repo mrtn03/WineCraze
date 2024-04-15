@@ -42,7 +42,5 @@ namespace WineCraze.Core.Models.Inventory
         [Required(ErrorMessage = "The ImageUrl field is required.")]
         [Url(ErrorMessage = "The ImageUrl field is not a valid URL.")]
         public string ImageUrl { get; set; }
-
-        public int SupplierId { get; set; }
     }
 }

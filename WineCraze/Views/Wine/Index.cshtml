@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WineViewModel>
+
+@{
+    ViewData["Title"] = "Wine List";
+}
+
+<h1>Wine List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Region</th>
+            <th>Quantity</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var wine in Model)
+        {
+            <tr>
+                <td>@wine.Name</td>
+                <td>@wine.Country</td>
+                <td>@wine.Type</td>
+                <td>@wine.Price</td>
+                <td>@wine.Region</td>
+                <td>@wine.Quantity</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@wine.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@wine.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@wine.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
