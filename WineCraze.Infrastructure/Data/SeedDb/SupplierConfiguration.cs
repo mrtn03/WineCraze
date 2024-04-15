@@ -33,6 +33,17 @@ namespace WineCraze.Infrastructure.Data.SeedDb
                     Email = "abvabv@abv.bg",
                     Phone = "123-677-3110",
                     Address = "Sofia Nadezda ul.Rozehn"
+                },
+
+                new Supplier
+                {
+                    Id = 3,
+                    Name = "Test b",
+                    ContactPerson = "suppTest@example.com",
+                    Bulstat = 585555,
+                    Email = "testb@abv.bg",
+                    Phone = "322-677-3110",
+                    Address = "Sofia Nadezda ul.Buges"
                 }
             );
         }

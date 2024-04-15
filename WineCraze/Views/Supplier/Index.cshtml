@@ -1,38 +1,41 @@
 ﻿@model IEnumerable<SupplierViewModel>
 
-<h2>Supplier List</h2>
+@{
+    ViewData["Title"] = "Supplier List";
+}
 
-@if (!Model.Any())
-{
-    <p>No suppliers found.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
+<h1>Supplier List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Contact Person</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Bulstat</th>
+            <th>Address</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var supplier in Model)
+        {
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Actions</th>
+                <td>@supplier.Name</td>
+                <td>@supplier.ContactPerson</td>
+                <td>@supplier.Email</td>
+                <td>@supplier.Phone</td>
+                <td>@supplier.Bulstat</td>
+                <td>@supplier.Address</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@supplier.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@supplier.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@supplier.Id">Delete</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var supplier in Model)
-            {
-                <tr>
-                    <td>@supplier.Name</td>
-                    <td>@supplier.Email</td>
-                    <td>@supplier.Phone</td>
-                    <td>
-                        <a href="@Url.Action("Edit", "Supplier", new { id = supplier.Id })">Edit</a> |
-                        <a href="@Url.Action("Details", "Supplier", new { id = supplier.Id })">Details</a> |
-                        <a href="@Url.Action("Delete", "Supplier", new { id = supplier.Id })">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        }
+    </tbody>
+</table>
 
 <a href="@Url.Action("Create", "Supplier")" class="btn btn-primary">Add Supplier</a>

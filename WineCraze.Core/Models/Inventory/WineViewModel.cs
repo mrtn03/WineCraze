@@ -36,7 +36,6 @@ namespace WineCraze.Core.Models.Inventory
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "The Quantity field is required.")]
-        [StringLength(WineViewModelMaxQuantity, ErrorMessage = "The Quantity field must be greater than 0.")]
         public int Quantity { get; set; }
 
         //[Required(ErrorMessage = "The ImageUrl field is required.")]
