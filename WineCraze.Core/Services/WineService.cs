@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WineCraze.Core.Contracts;
+using WineCraze.Core.Exceptions;
 using WineCraze.Core.Models.Inventory;
 using WineCraze.Core.Models.Supplier;
 using WineCraze.Infrastructure.Data.Common;
@@ -60,7 +61,6 @@ namespace WineCraze.Core.Services
                 Region = wine.Region,
                 ImageUrl = wine.ImageUrl,
                 Quantity = wine.Quantity,
-                SupplierId = wine.SupplierId,
             };
 
             return wineViewModel;
@@ -78,7 +78,6 @@ namespace WineCraze.Core.Services
                 Region = viewModel.Region,
                 ImageUrl = viewModel.ImageUrl,
                 Quantity = viewModel.Quantity,
-                SupplierId = viewModel.SupplierId,
             };
 
             await repository.AddAsync(wine);
@@ -91,35 +90,46 @@ namespace WineCraze.Core.Services
 
             if (wine is null)
             {
-                throw new ArgumentException("Wine not found.");
-                // should be a custom exception and controller should handle it with try/catch
+                throw new WineUpdateException("Wine not found.");
+               
             }
 
-            wine.Name = viewModel.Name;
-            wine.Country = viewModel.Country;
-            wine.Type = viewModel.Type;
-            wine.Price = viewModel.Price;
-            wine.CreatedOn = viewModel.CreatedOn;
-            wine.Region = viewModel.Region;
-            wine.ImageUrl = viewModel.ImageUrl;
-            wine.Quantity = viewModel.Quantity;
-            wine.SupplierId = viewModel.SupplierId;
+            try
+            {
+                wine.Name = viewModel.Name;
+                wine.Country = viewModel.Country;
+                wine.Type = viewModel.Type;
+                wine.Price = viewModel.Price;
+                wine.CreatedOn = viewModel.CreatedOn;
+                wine.Region = viewModel.Region;
+                wine.ImageUrl = viewModel.ImageUrl;
+                wine.Quantity = viewModel.Quantity;
+                wine.SupplierId = viewModel.SupplierId;
 
-            await repository.SaveChangesAsync();
+                await repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new WineUpdateException("Failed to update wine.", ex);
+            }
         }
-
         public async Task DeleteWineAsync(int id)
         {
             var wine = await repository.GetByIdAsync<Wine>(id);
-
             if (wine is null)
             {
-                throw new ArgumentException("Wine not found.");
-                // should be a custom exception and controller should handle it with try/catch
+                throw new WineNotFoundException($"Wine with ID {id} not found.");
             }
 
-            await repository.DeleteAsync<Wine>(wine.Id);
-            await repository.SaveChangesAsync();
+            try
+            {
+                await repository.DeleteAsync<Wine>(wine.Id);
+                await repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new WineDeletionException($"Error deleting wine with ID {id}.", ex);
+            }
         }
         public async Task<IEnumerable<WineViewModel>> SearchWinesAsync(string searchTerm)
         {
