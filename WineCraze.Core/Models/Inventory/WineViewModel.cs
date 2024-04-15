@@ -13,19 +13,19 @@ namespace WineCraze.Core.Models.Inventory
         public int Id { get; set; }
 
         [Required(ErrorMessage = "The Name field is required.")]
-        [StringLength(WineViewModelMaxName, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
+        [StringLength(WineViewModelMaxName)]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "The Type field is required.")]
-        [StringLength(WineViewModelMaxType, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [StringLength(WineViewModelMaxType)]
         public string Type { get; set; }
 
         [Required(ErrorMessage = "The Country field is required.")]
-        [StringLength(WineViewModelMaxCountry, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [StringLength(WineViewModelMaxCountry)]
         public string Country { get; set; }
 
         [Required(ErrorMessage = "The Region field is required.")]
-        [StringLength(WineViewModelMaxRegion, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [StringLength(WineViewModelMaxRegion)]
         public string Region { get; set; }
 
         [Required(ErrorMessage = "The CreatedOn field is required.")]
@@ -39,8 +39,8 @@ namespace WineCraze.Core.Models.Inventory
         [StringLength(WineViewModelMaxQuantity, ErrorMessage = "The Quantity field must be greater than 0.")]
         public int Quantity { get; set; }
 
-        [Required(ErrorMessage = "The ImageUrl field is required.")]
-        [Url(ErrorMessage = "The ImageUrl field is not a valid URL.")]
-        public string ImageUrl { get; set; }
+        //[Required(ErrorMessage = "The ImageUrl field is required.")]
+        //[Url(ErrorMessage = "The ImageUrl field is not a valid URL.")]
+        //public string ImageUrl { get; set; }
     }
 }

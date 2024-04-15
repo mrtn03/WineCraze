@@ -1,40 +1,22 @@
-﻿@model IEnumerable<WineViewModel>
-
-<h2>Search Results</h2>
-
-@if (Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Country</th>
-                <th>Type</th>
-                <th>Price</th>
-                <th>Region</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var wine in Model)
-            {
-                <tr>
-                    <td>@wine.Name</td>
-                    <td>@wine.Country</td>
-                    <td>@wine.Type</td>
-                    <td>@wine.Price</td>
-                    <td>@wine.Region</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+﻿@{
+    ViewData["Title"] = "Search Wines";
 }
-else
+
+<h1>Search Wines</h1>
+
+@using (Html.BeginForm("Search", "Wine", FormMethod.Get))
 {
-    <p>No wines found.</p>
+        <div>
+            <label>Name:</label>
+            <input type="text" name="nameSearch" />
+
+            <label>Type:</label>
+            <input type="text" name="typeSearch" />
+
+            <!-- Add more input fields for other search criteria as needed -->
+
+            <button type="submit">Search</button>
+        </div>
 }
-<form method="post" action="/Wine/Search">
-    <p>
-        <input type="text" name="searchTerm" class="search" value="@Model" />
-        <input type="submit" value="Search" class="searchSubmit" />
-    </p>
-</form>
+
+<a asp-controller="Home" asp-action="Index">Back to List</a>

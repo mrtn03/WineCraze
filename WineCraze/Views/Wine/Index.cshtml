@@ -37,3 +37,11 @@
         }
     </tbody>
 </table>
+
+<a asp-action="Search" asp-controller="Wine">Search Wines</a>
+<form asp-controller="Wine" asp-action="Search" method="get">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="searchTerm" placeholder="Search for wines" aria-label="Search for wines" aria-describedby="button-search">
+        <button class="btn btn-outline-secondary" type="submit" id="button-search">Search</button>
+    </div>
+</form>

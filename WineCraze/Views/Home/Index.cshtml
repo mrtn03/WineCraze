@@ -20,6 +20,15 @@
         <div id="banner">
             <h1>WineCraze Company</h1>
         </div>
+        <p>For searching Wines click here!</p>
+        <div class="search">
+            <form method="get" action="/Wine/Search">
+                <p>
+                    <input type="text" value="Search Wines" name="query" class="search" />
+                    <input type="submit" value="Search" class="searchSubmit" />
+                </p>
+            </form>
+        </div>
         <div id="sidebar">
             <h1> Ways of preparing the wine </h1>
             <div id="navcontainer">
@@ -28,16 +37,7 @@
                     <li><a href="https://bononiaestate.com/en/" title="Second Way of preparing">SecondWay</a></li>
                     <li><a href="https://kakda.org/" title="Third Way of preparing">ThirdWay</a></li>
                 </ul>
-            </div>
-            <p>For searching Wines click here!</p>
-            <div class="search">
-                <form method="post" action="/Wine/Search">
-                    <p>
-                        <input type="text" value="Search Wines" name="search" class="search" />
-                        <input type="submit" value="Search" class="searchSubmit" />
-                    </p>
-                </form>
-            </div>
+            </div>         
         </div>
         <div id="content">
             <h1>Welcome to <span style="color:#4B7219;">Wine</span> WineBlog!</h1>

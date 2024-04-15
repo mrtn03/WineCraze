@@ -258,7 +258,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
 
                     b.HasData(
                         new
@@ -330,7 +330,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reports");
+                    b.ToTable("Reports", (string)null);
 
                     b.HasData(
                         new
@@ -394,7 +394,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasIndex("WineId");
 
-                    b.ToTable("Sales");
+                    b.ToTable("Sales", (string)null);
 
                     b.HasData(
                         new
@@ -463,7 +463,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("Suppliers", (string)null);
 
                     b.HasData(
                         new
@@ -545,7 +545,7 @@ namespace WineCraze.Infrastructure.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Wines");
+                    b.ToTable("Wines", (string)null);
 
                     b.HasData(
                         new

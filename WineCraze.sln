@@ -5,9 +5,9 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineCraze", "WineCraze\WineCraze.csproj", "{18252E67-7AAF-4E7F-90BD-BDDD63FC767E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineCraze.Core", "WineCraze.Core\WineCraze.Core.csproj", "{18D285BB-E24C-4C32-9AC9-2E8F6F022DED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineCraze.Core", "WineCraze.Core\WineCraze.Core.csproj", "{18D285BB-E24C-4C32-9AC9-2E8F6F022DED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineCraze.Infrastructure", "WineCraze.Infrastructure\WineCraze.Infrastructure.csproj", "{3F637B2D-458F-43F5-8C24-DE954ACD6F34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineCraze.Infrastructure", "WineCraze.Infrastructure\WineCraze.Infrastructure.csproj", "{3F637B2D-458F-43F5-8C24-DE954ACD6F34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
