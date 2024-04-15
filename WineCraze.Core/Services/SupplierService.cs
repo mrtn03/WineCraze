@@ -64,7 +64,7 @@ namespace WineCraze.Core.Services
                 Bulstat = viewModel.Bulstat
             };
 
-            await _supp.AddAsync(supplier);
+            _supp.AddAsync(supplier);
             await _supp.SaveChangesAsync();
         }
 
