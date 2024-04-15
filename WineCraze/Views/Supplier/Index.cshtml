@@ -19,19 +19,19 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var supplier in Model)
+        @foreach (var Supplier in Model)
         {
             <tr>
-                <td>@supplier.Name</td>
-                <td>@supplier.ContactPerson</td>
-                <td>@supplier.Email</td>
-                <td>@supplier.Phone</td>
-                <td>@supplier.Bulstat</td>
-                <td>@supplier.Address</td>
+                <td>@Supplier.Name</td>
+                <td>@Supplier.ContactPerson</td>
+                <td>@Supplier.Email</td>
+                <td>@Supplier.Phone</td>
+                <td>@Supplier.Bulstat</td>
+                <td>@Supplier.Address</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@supplier.Id">Details</a> |
-                    <a asp-action="Edit" asp-route-id="@supplier.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@supplier.Id">Delete</a>
+                    <a asp-action="Details" asp-route-id="@Supplier.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@Supplier.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@Supplier.Id">Delete</a>
                 </td>
             </tr>
         }
