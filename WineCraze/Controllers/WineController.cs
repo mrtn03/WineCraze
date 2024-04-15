@@ -23,7 +23,6 @@ namespace WineCraze.Controllers
             }
             catch (Exception e)
             {
-                // logger for exception
                 return NotFound();
             }
         }
@@ -36,7 +35,7 @@ namespace WineCraze.Controllers
             {
                 var wine = await _wineService.GetWineByIdAsync(id);
 
-                if (wine is null)
+                if (wine == null)
                 {
                     return NotFound();
                 }
@@ -44,7 +43,6 @@ namespace WineCraze.Controllers
             }
             catch (Exception e)
             {
-                // logger for exception
                 return NotFound();
             }
         }
@@ -61,7 +59,7 @@ namespace WineCraze.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(WineViewModel viewModel)
         {
-            if (ModelState.IsValid is false)
+            if (ModelState.IsValid == false)
             {
                 return View(viewModel);
             }
@@ -85,7 +83,7 @@ namespace WineCraze.Controllers
             {
                 var wine = await _wineService.GetWineByIdAsync(id);
 
-                if (wine is null)
+                if (wine == null)
                 {
                     return NotFound();
                 }
@@ -94,12 +92,10 @@ namespace WineCraze.Controllers
             }
             catch (Exception e)
             {
-                // logger for exception
                 return NotFound();
             }
         }
 
-        // POST: Wine/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, WineViewModel viewModel)
@@ -120,7 +116,6 @@ namespace WineCraze.Controllers
             }
             catch (ArgumentException)
             {
-                // logger for exception
                 return NotFound();
             }
             return RedirectToAction(nameof(Index));
@@ -133,7 +128,7 @@ namespace WineCraze.Controllers
             {
                 var wine = await _wineService.GetWineByIdAsync(id);
 
-                if (wine is null)
+                if (wine == null)
                 {
                     return NotFound();
                 }
@@ -157,7 +152,6 @@ namespace WineCraze.Controllers
             }
             catch (Exception e)
             {
-                // logger for exception
                 return NotFound();
             }
         }
