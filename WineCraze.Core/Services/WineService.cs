@@ -31,7 +31,6 @@ namespace WineCraze.Core.Services
                     Price = w.Price,
                     CreatedOn = w.CreatedOn,
                     Region = w.Region,
-                    //ImageUrl = w.ImageUrl,
                     Quantity = w.Quantity
 
                 })
@@ -58,7 +57,6 @@ namespace WineCraze.Core.Services
                 Price = wine.Price,
                 CreatedOn = wine.CreatedOn,
                 Region = wine.Region,
-                //ImageUrl = wine.ImageUrl,
                 Quantity = wine.Quantity,
             };
 
@@ -75,7 +73,6 @@ namespace WineCraze.Core.Services
                 Price = viewModel.Price,
                 CreatedOn = DateTime.Now.ToString(),
                 Region = viewModel.Region,
-                //ImageUrl = viewModel.ImageUrl,
                 Quantity = viewModel.Quantity,
             };
 
@@ -101,7 +98,6 @@ namespace WineCraze.Core.Services
                 wine.Price = viewModel.Price;
                 wine.CreatedOn = viewModel.CreatedOn;
                 wine.Region = viewModel.Region;
-                //wine.ImageUrl = viewModel.ImageUrl;
                 wine.Quantity = viewModel.Quantity;
 
                 await repository.SaveChangesAsync();
@@ -143,7 +139,6 @@ namespace WineCraze.Core.Services
                     Price = w.Price,
                     CreatedOn = w.CreatedOn,
                     Region = w.Region,
-                    //ImageUrl = w.ImageUrl,
                     Quantity = w.Quantity
                 })
                 .ToListAsync();
