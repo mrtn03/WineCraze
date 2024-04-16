@@ -40,7 +40,8 @@ namespace WineCraze.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new ReportViewModel(); 
+            return View(viewModel);
         }
 
         [HttpPost]

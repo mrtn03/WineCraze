@@ -13,6 +13,7 @@ else
             <tr>
                 <th>Title</th>
                 <th>Date Created</th>
+                <th>Description</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@ else
                 <tr>
                     <td>@report.Title</td>
                     <td>@report.DateCreated</td>
+                    <td>@report.Description</td>
                     <td>
                         <a href="@Url.Action("Details", "Report", new { id = report.Id })">Details</a> |
                         <a href="@Url.Action("Edit", "Report", new { id = report.Id })">Edit</a> |

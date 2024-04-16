@@ -15,6 +15,7 @@
             <th>Price</th>
             <th>Region</th>
             <th>Quantity</th>
+            <th>CreadetOn</th>
             <th></th>
         </tr>
     </thead>
@@ -28,6 +29,7 @@
                 <td>@wine.Price</td>
                 <td>@wine.Region</td>
                 <td>@wine.Quantity</td>
+                <td>@wine.CreatedOn</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@wine.Id">Details</a> |
                     <a asp-action="Edit" asp-route-id="@wine.Id">Edit</a> |

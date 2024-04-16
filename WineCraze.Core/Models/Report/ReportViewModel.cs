@@ -10,8 +10,9 @@ namespace WineCraze.Core.Models.Report
 
         public string Description { get; set; } = string.Empty;
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd H:mm}")]
+     
+        [Required(ErrorMessage = "The DateCreated field is required.")]
+        public string DateCreated { get; set; }
 
-        public string DateCreated { get; set; } = string.Empty;
     }
 }

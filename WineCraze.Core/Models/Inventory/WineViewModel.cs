@@ -37,9 +37,5 @@ namespace WineCraze.Core.Models.Inventory
 
         [Required(ErrorMessage = "The Quantity field is required.")]
         public int Quantity { get; set; }
-
-        //[Required(ErrorMessage = "The ImageUrl field is required.")]
-        //[Url(ErrorMessage = "The ImageUrl field is not a valid URL.")]
-        //public string ImageUrl { get; set; }
     }
 }
