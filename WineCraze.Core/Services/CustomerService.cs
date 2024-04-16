@@ -63,8 +63,8 @@ namespace WineCraze.Core.Services
                 PhoneNumber = viewModel.PhoneNumber
             };
 
-            await customer.AddAsync(_customer);
-            await customer.SaveChangesAsync();
+            await _customer.AddAsync(customer);
+            await _customer.SaveChangesAsync();
         }
 
         public async Task UpdateCustomerAsync(CustomerViewModel viewModel)

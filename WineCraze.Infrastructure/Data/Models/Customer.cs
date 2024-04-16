@@ -31,15 +31,7 @@ namespace WineCraze.Infrastructure.Data.Models
 
         public ICollection<Sale> Sales { get; set; } = new HashSet<Sale>();
 
-        public Task AddAsync(IRepository customer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
 
