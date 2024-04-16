@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="NUnit" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WineCraze.Core\WineCraze.Core.csproj" />
+    <ProjectReference Include="..\WineCraze.Infrastructure\WineCraze.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
