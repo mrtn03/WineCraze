@@ -41,6 +41,7 @@ namespace WineCraze.Controllers
         public IActionResult Create()
         {
             var viewModel = new ReportViewModel(); 
+
             return View(viewModel);
         }
 
