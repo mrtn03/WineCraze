@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using WineCraze.Infrastructure.Data.Common;
 
 namespace WineCraze.Infrastructure.Data.Models
 {
@@ -30,7 +31,7 @@ namespace WineCraze.Infrastructure.Data.Models
 
         public ICollection<Sale> Sales { get; set; } = new HashSet<Sale>();
 
-        public Task AddAsync(Customer customer)
+        public Task AddAsync(IRepository customer)
         {
             throw new NotImplementedException();
         }

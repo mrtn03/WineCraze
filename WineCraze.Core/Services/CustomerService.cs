@@ -8,16 +8,16 @@ namespace WineCraze.Core.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly IRepository customer;
+        private readonly IRepository _customer;
 
         public CustomerService(IRepository _repository)
         {
-            customer = _repository;
+            _customer = _repository;
         }
 
         public async Task<IEnumerable<CustomerViewModel>> GetAllCustomersAsync()
         {
-            var customerViewModels = await customer
+            var customerViewModels = await _customer
                 .All<Customer>()
                 .Select(c => new CustomerViewModel
                 {
@@ -34,9 +34,9 @@ namespace WineCraze.Core.Services
 
         public async Task<CustomerViewModel> GetCustomerByIdAsync(int id)
         {
-            var GetCustomer = await customer.GetByIdAsync<Customer>(id);
+            var GetCustomer = await _customer.GetByIdAsync<Customer>(id);
 
-            if (customer == null)
+            if (_customer == null)
             {
                 return null;
             }
@@ -63,15 +63,15 @@ namespace WineCraze.Core.Services
                 PhoneNumber = viewModel.PhoneNumber
             };
 
-            await customer.AddAsync(customer);
+            await customer.AddAsync(_customer);
             await customer.SaveChangesAsync();
         }
 
         public async Task UpdateCustomerAsync(CustomerViewModel viewModel)
         {
-            var UpCustomer = await customer.GetByIdAsync<Customer>(viewModel.Id);
+            var UpCustomer = await _customer.GetByIdAsync<Customer>(viewModel.Id);
 
-            if (customer == null)
+            if (_customer == null)
             {
                 throw new ArgumentException("Customer not found.");
             }
@@ -81,20 +81,20 @@ namespace WineCraze.Core.Services
             UpCustomer.Address = viewModel.Address;
             UpCustomer.PhoneNumber = viewModel.PhoneNumber;
 
-            await customer.SaveChangesAsync();
+            await _customer.SaveChangesAsync();
         }
 
         public async Task DeleteCustomerAsync(int id)
         {
-            var resCustomer = await customer.GetByIdAsync<Customer>(id);
+            var resCustomer = await _customer.GetByIdAsync<Customer>(id);
 
-            if (customer == null)
+            if (_customer == null)
             {
                 throw new ArgumentException("Customer not found.");
             }
 
-            await customer.DeleteAsync<Customer>(id);
-            await customer.SaveChangesAsync();
+            await _customer.DeleteAsync<Customer>(id);
+            await _customer.SaveChangesAsync();
         }
     }
 }

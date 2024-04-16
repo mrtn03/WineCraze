@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WineCraze.Core.Services;
+using WineCraze.Core.Contracts;
 
 namespace WineCraze.Attributes
 {

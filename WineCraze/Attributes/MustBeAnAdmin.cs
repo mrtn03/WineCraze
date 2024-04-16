@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Security.Claims;
+using WineCraze.Core.Contracts;
 using WineCraze.Core.Services;
 
 namespace WineCraze.Attributes

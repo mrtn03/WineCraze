@@ -38,7 +38,7 @@ namespace WineCraze.Infrastructure.Data.Models
         public int SupplierId { get; set; }
         [ForeignKey(nameof(SupplierId))]
         public Supplier Supplier { get; set; } = null!;
-        
+
     }
 }
 
