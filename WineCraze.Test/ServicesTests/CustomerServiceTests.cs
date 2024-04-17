@@ -23,25 +23,24 @@ namespace WineCraze.Test.ServicesTests
         public async Task GetAllCustomersAsync_ShouldReturnListOfCustomerViewModels()
         {
             // Arrange
+            var mockRepository = new Mock<IRepository>();
+            var customerService = new CustomerService(mockRepository.Object);
+
             var customers = new List<Customer>
             {
-                new Customer { Id = 1, Name = "John",
-                    Email = "john@example.com",
-                    Address = "123 Main St",
-                    PhoneNumber = "123-456-7890" },
-
-                new Customer { Id = 2, Name = "Alice",
-                    Email = "alice@example.com",
-                    Address = "456 Elm St",
-                    PhoneNumber = "987-654-3210" }
+                new Customer { Id = 1, Name = "Customer1", Email = "customer1@example.com" },
+                new Customer { Id = 2, Name = "Customer2", Email = "customer2@example.com" }
             };
-            _repositoryMock.Setup(repo => repo.All<Customer>()).Returns(customers.AsQueryable());
+
+            mockRepository.Setup(repo => repo.All<Customer>()).Returns(customers.AsQueryable());
 
             // Act
-            var result = await _customerService.GetAllCustomersAsync();
+            var result = await customerService.GetAllCustomersAsync();
 
             // Assert
-            Assert.AreEqual(2, result.Count());
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf<IEnumerable<CustomerViewModel>>(result);
+            Assert.AreEqual(2, result.Count()); // Assuming we have 2 customers in the list
         }
 
         [Test]
