@@ -46,6 +46,7 @@ namespace WineCraze.Extensions
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = true;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<WineCrazeDbContext>();
 
             return services;
