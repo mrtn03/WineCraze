@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
-using static WineCraze.Core.Constants.AdminConstants;
+using static WineCraze.Core.Constants.RoleConstants;
 
 namespace WineCraze.Areas.Admin.Controllers
 {
-    [Area(AdminAreaName)]
-    [Authorize(Roles = AdminRole)]
+    [Authorize]
     public class AdminBaseController : Controller
     {
 

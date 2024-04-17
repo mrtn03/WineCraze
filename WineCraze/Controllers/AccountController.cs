@@ -4,104 +4,101 @@ using Microsoft.AspNetCore.Mvc;
 using WineCraze.Core.Contracts;
 using WineCraze.Core.Models.Account;
 using WineCraze.Infrastructure.Data.Models;
+using static WineCraze.Core.Constants.RoleConstants;
+using static WineCraze.Infrastructure.Constants.CustomClaimsNames;
 
 namespace WineCraze.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IAccountService _accountService;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly UserManager<ApplicationUser> userManager;
+        private IUserStore<ApplicationUser> userStore;
 
-        public AccountController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            IAccountService accountService)
+        public AccountController(SignInManager<ApplicationUser> _signInManager,
+            UserManager<ApplicationUser> _userManager,
+            IUserStore<ApplicationUser> _userStore)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _accountService = accountService;
+            signInManager = _signInManager;
+            userManager = _userManager;
+            userStore = _userStore;
         }
-
-        [AllowAnonymous] // Allow anonymous access to this action
-        public IActionResult Login(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    return RedirectToLocal(returnUrl);
-                }
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View(model);
-            }
-            return View(model);
-        }
-
-        [AllowAnonymous]
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
-                }
+                return View(model);
+            }
+
+            ApplicationUser applicationUser = new ApplicationUser()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+
+            };
+
+            await userManager.SetEmailAsync(applicationUser, model.Email);
+            await userManager.SetUserNameAsync(applicationUser, model.Email);
+
+            var result = await userManager.CreateAsync(applicationUser, model.Password);
+
+            if (!result.Succeeded)
+            {
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+                return View(model);
             }
-            return View(model);
+
+            await userManager.AddClaimAsync(applicationUser, new System.Security.Claims.Claim(UserFullNameClaim, $"{applicationUser.FirstName} {applicationUser.LastName}"));
+            await signInManager.SignInAsync(applicationUser, false);
+
+            return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(HomeController.Index), "Home");
-        }
-
-        [AllowAnonymous]
         [HttpGet]
-        public IActionResult AccessDenied()
+        public IActionResult Login(string? returnUrl = null)
         {
+            LoginViewModel model = new LoginViewModel()
+            {
+                ReturnUrl = returnUrl,
+            };
             return View();
         }
 
-        private IActionResult RedirectToLocal(string returnUrl)
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (!ModelState.IsValid)
             {
-                return Redirect(returnUrl);
+                return View(model);
             }
-            else
+
+            var result = await signInManager
+                .PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+
+            if (!result.Succeeded)
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                ModelState.AddModelError(string.Empty, "There was an error while logging you in! Please try again later or contact an administrator.");
+
+                return View(model);
             }
+
+            var user = await userManager.FindByEmailAsync(model.Email);
+
+            if (await userManager.IsInRoleAsync(user, AdminRole))
+            {
+                return RedirectToAction("DashBoard", "Home", new { area = "Admin" });
+            }
+            return Redirect(model.ReturnUrl ?? "/Home/Index");
         }
     }
 }
