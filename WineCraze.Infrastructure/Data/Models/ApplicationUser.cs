@@ -7,15 +7,13 @@ namespace WineCraze.Infrastructure.Data.Models
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        [MaxLength(UserFirstNameMaxLength)]
+        [MaxLength(MaxLengthFirstName)]
         [PersonalData]
         public string FirstName { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(UserLastNameMaxLength)]
+        [MaxLength(MaxLengthLastName)]
         [PersonalData]
         public string LastName { get; set; } = string.Empty;
-
-        public Customer? Customer { get; set; }
     }
 }

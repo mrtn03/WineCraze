@@ -31,7 +31,7 @@ namespace WineCraze.Controllers
 
         [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(int statusCode)
+        public IActionResult Error(int? statusCode)
         {
 
             if (statusCode == 400)
@@ -44,7 +44,19 @@ namespace WineCraze.Controllers
                 return View("Error401");
             }
 
-            return View();
+            if (statusCode.HasValue)
+            {
+                if (statusCode.Value == 404)
+                {
+                    return View("NotFound");
+                }
+                else if (statusCode.Value == 500)
+                {
+                    return View("InternalServerError");
+                }
+            }
+
+            return View("Error");
         }
 
         [HttpGet]

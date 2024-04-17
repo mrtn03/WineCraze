@@ -9,13 +9,13 @@ using static WineCraze.Infrastructure.Constants.CustomClaimsNames;
 
 namespace WineCraze.Controllers
 {
-    public class AccountController : BaseController
+    public class UserController : BaseController
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private IUserStore<ApplicationUser> userStore;
 
-        public AccountController(SignInManager<ApplicationUser> _signInManager,
+        public UserController(SignInManager<ApplicationUser> _signInManager,
             UserManager<ApplicationUser> _userManager,
             IUserStore<ApplicationUser> _userStore)
         {
