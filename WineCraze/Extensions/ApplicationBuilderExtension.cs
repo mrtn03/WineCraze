@@ -18,7 +18,7 @@ namespace WineCraze.Extensions
 
                 await roleManager.CreateAsync(role);
 
-                var admin = await userManager.FindByEmailAsync("stanislav@abv.bg");
+                var admin = await userManager.FindByEmailAsync("mpetrov903@gmail.com");
 
                 if (admin != null)
                 {
