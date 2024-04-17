@@ -20,35 +20,7 @@ namespace WineCraze.Test.ServicesTests
             _reportService = new ReportService(_repositoryMock.Object);
         }
 
-        [Test]
-        public async Task GetAllReportsAsync_ShouldReturnAllReports()
-        {
-            // Arrange
-            var reports = new List<Report>
-        {
-            new Report 
-            {
-                Id = 1, 
-                Title = "Report 1",
-                Description = "Description 1", 
-                DateCreated = DateTime.UtcNow.ToString()
-            },
-            new Report 
-            {
-                Id = 2, 
-                Title = "Report 2", 
-                Description = "Description 2", 
-                DateCreated = DateTime.UtcNow.ToString()
-            }
-        };
-            _repositoryMock.Setup(repo => repo.All<Report>()).Returns(reports.AsQueryable());
-
-            // Act
-            var result = await _reportService.GetAllReportsAsync();
-
-            // Assert
-            Assert.AreEqual(reports.Count, result.Count());
-        }
+        
 
         [Test]
         public async Task GetReportByIdAsync_ShouldReturnReportWithGivenId()

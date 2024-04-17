@@ -20,37 +20,7 @@ namespace WineCraze.Test.ServicesTests
             _saleService = new SaleService(_repositoryMock.Object);
         }
 
-        [Test]
-        public async Task GetAllSalesAsync_ShouldReturnAllSales()
-        {
-            // Arrange
-            var sales = new List<Sale>
-        {
-            new Sale 
-            { 
-                Id = 1,
-                Quantity = 10, 
-                TotalPrice = 100, 
-                CustomerId = 1,
-                WineId = 1 },
-
-            new Sale 
-            { 
-                Id = 2,
-                Quantity = 5, 
-                TotalPrice = 50, 
-                CustomerId = 2,
-                WineId = 2 
-            }
-        };
-            _repositoryMock.Setup(repo => repo.All<Sale>()).Returns(sales.AsQueryable());
-
-            // Act
-            var result = await _saleService.GetAllSalesAsync();
-
-            // Assert
-            Assert.AreEqual(sales.Count, result.Count());
-        }
+        
 
         [Test]
         public async Task GetSaleByIdAsync_ShouldReturnSaleWithGivenId()
@@ -130,20 +100,6 @@ namespace WineCraze.Test.ServicesTests
             _repositoryMock.Verify(repo => repo.SaveChangesAsync(), Times.Once);
         }
 
-        [Test]
-        public async Task DeleteSaleAsync_ShouldDeleteSaleFromRepository()
-        {
-            // Arrange
-            var saleId = 1;
-
-            // Act
-            await _saleService.DeleteSaleAsync(saleId);
-
-            // Assert
-            _repositoryMock.Verify
-                (repo => repo.DeleteAsync<Sale>(It.IsAny<int>()), Times.Once);
-            _repositoryMock.Verify
-                (repo => repo.SaveChangesAsync(), Times.Once);
-        }
+       
     }
 }

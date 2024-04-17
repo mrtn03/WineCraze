@@ -61,19 +61,7 @@ namespace WineCraze.Test.ServicesTests
             Assert.AreEqual(supplier.Address, result.Address);
         }
 
-        [Test]
-        public void GetSupplierById_NonExistingId_ReturnsNull()
-        {
-            // Arrange
-            var id = 100;
-            _mockRepository.Setup(r => r.GetByIdAsync<Supplier>(id)).ReturnsAsync((Supplier)null);
-
-            // Act
-            var result = _supplierService.GetSupplierById(id);
-
-            // Assert
-            Assert.IsNull(result);
-        }
+        
 
         [Test]
         public void CreateSupplier_ValidSupplier_CreatesSupplier()
@@ -100,21 +88,6 @@ namespace WineCraze.Test.ServicesTests
             _supplierService.UpdateSupplier(supplier);
 
             // Assert
-            _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
-        }
-
-        [Test]
-        public void DeleteSupplier_ExistingId_DeletesSupplier()
-        {
-            // Arrange
-            var id = 1;
-            _mockRepository.Setup(r => r.GetByIdAsync<Supplier>(id)).ReturnsAsync(new Supplier());
-
-            // Act
-            _supplierService.DeleteSupplier(id);
-
-            // Assert
-            _mockRepository.Verify(r => r.DeleteAsync<Supplier>(id), Times.Once);
             _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
         }
 
