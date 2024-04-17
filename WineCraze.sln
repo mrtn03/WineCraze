@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineCraze.Core", "WineCraze
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineCraze.Infrastructure", "WineCraze.Infrastructure\WineCraze.Infrastructure.csproj", "{3F637B2D-458F-43F5-8C24-DE954ACD6F34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineCraze.Test", "WineCraze.Test\WineCraze.Test.csproj", "{DAFBC231-9D01-43AF-AE0A-11C51D504EA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3F637B2D-458F-43F5-8C24-DE954ACD6F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F637B2D-458F-43F5-8C24-DE954ACD6F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F637B2D-458F-43F5-8C24-DE954ACD6F34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAFBC231-9D01-43AF-AE0A-11C51D504EA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAFBC231-9D01-43AF-AE0A-11C51D504EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAFBC231-9D01-43AF-AE0A-11C51D504EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAFBC231-9D01-43AF-AE0A-11C51D504EA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
