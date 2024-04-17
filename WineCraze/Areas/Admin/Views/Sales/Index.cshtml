@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SaleViewModel>
+
+@{
+    ViewData["Title"] = "Sale List";
+}
+
+<h1>Sale List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Wine</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sale in Model)
+        {
+            <tr>
+                <td>@sale.Id</td>
+                <td>@sale.CustomerId</td>
+                <td>@sale.WineId</td>
+                <td>@sale.Quantity</td>
+                <td>@sale.TotalPrice</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@sale.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@sale.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@sale.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WineViewModel>
+
+@{
+    ViewData["Title"] = "Wine List";
+}
+
+<h1>Wine List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Region</th>
+            <th>Quantity</th>
+            <th>CreadetOn</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var wine in Model)
+        {
+            <tr>
+                <td>@wine.Name</td>
+                <td>@wine.Country</td>
+                <td>@wine.Type</td>
+                <td>@wine.Price</td>
+                <td>@wine.Region</td>
+                <td>@wine.Quantity</td>
+                <td>@wine.CreatedOn</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@wine.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@wine.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@wine.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Search" asp-controller="Wine">Search Wines</a>
+<form asp-controller="Wine" asp-action="Search" method="get">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="searchTerm" placeholder="Search for wines" aria-label="Search for wines" aria-describedby="button-search">
+        <button class="btn btn-outline-secondary" type="submit" id="button-search">Search</button>
+    </div>
+    </form>

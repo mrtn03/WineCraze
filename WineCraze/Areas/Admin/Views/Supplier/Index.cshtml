@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SupplierViewModel>
+
+@{
+    ViewData["Title"] = "Supplier List";
+}
+
+<h1>Supplier List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Contact Person</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Bulstat</th>
+            <th>Address</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Supplier in Model)
+        {
+            <tr>
+                <td>@Supplier.Name</td>
+                <td>@Supplier.ContactPerson</td>
+                <td>@Supplier.Email</td>
+                <td>@Supplier.Phone</td>
+                <td>@Supplier.Bulstat</td>
+                <td>@Supplier.Address</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@Supplier.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@Supplier.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@Supplier.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Create", "Supplier")" class="btn btn-primary">Add Supplier</a>

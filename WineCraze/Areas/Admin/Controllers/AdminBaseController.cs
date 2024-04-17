@@ -5,9 +5,13 @@ using static WineCraze.Core.Constants.RoleConstants;
 
 namespace WineCraze.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Area("Admin")]
+    [Authorize(Roles = AdminRole)]
     public class AdminBaseController : Controller
     {
-
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }

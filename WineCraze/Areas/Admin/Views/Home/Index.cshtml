@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Wine Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">WineCraze!</h1>
+    <p> <a href="https://docs.microsoft.com/aspnet/core"></a>WineBlog</p>
+</div>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>*WINE*</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="container">
+        <div id="banner">
+            <h1>WineCraze Company</h1>
+        </div>
+        <p>For searching Wines click here!</p>
+        <div class="search">
+            <form method="get" action="/Wine/Search">
+                <p>
+                    <input type="text" value="Search Wines" name="query" class="search" />
+                    <input type="submit" value="Search" class="searchSubmit" />
+                </p>
+            </form>
+        </div>
+        <div id="sidebar">
+            <h1> Ways of preparing the wine </h1>
+            <div id="navcontainer">
+                <ul id="navlist">
+                    <li><a href="https://doo.bg/" title="First Way of preparing">FirstWay</a></li>
+                    <li><a href="https://bononiaestate.com/en/" title="Second Way of preparing">SecondWay</a></li>
+                    <li><a href="https://kakda.org/" title="Third Way of preparing">ThirdWay</a></li>
+                </ul>
+            </div>         
+        </div>
+        <div id="content">
+            <h1>Welcome to <span style="color:#4B7219;">Wine</span> WineBlog!</h1>
+            <blockquote>
+                Site for buying wines<br />
+                <a href="https://bononiaestate.com/en/" title="my website">my website</a>.
+            </blockquote>
+            <h1>Products</h1>
+            <div class="box">
+                <p><img class="img" src="img/2.jpg" alt="logo" /></p>
+            </div>
+            <p> Chardonay Wine</p>
+            <div class="box">
+                <p><img class="img" src="img/wines.jpg" alt="logo" /></p>
+            </div>
+            <p> Sorts Wine</p>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</body>
+</html>
